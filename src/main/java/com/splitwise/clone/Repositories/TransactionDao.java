@@ -1,5 +1,7 @@
 package com.splitwise.clone.Repositories;
 
+import java.util.List;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
@@ -14,17 +16,16 @@ public interface TransactionDao extends JpaRepository<Transaction,Integer>{
     public Transaction addTransactionByEvent(int userId,int eventId);
 
     @Query(value = "select * from transaction",nativeQuery = true)
-    public Transaction getAllTransactionByUser(int userId);
+    public List<Transaction> getAllTransactionByUser(int userId);
 
     @Query(value = "select * from transaction",nativeQuery = true)
-    public Transaction getTransactionByEvent(int userId,int eventId);
+    public List<Transaction> getTransactionByEvent(int userId,int eventId);
 
     @Query(value = "select * from transaction",nativeQuery = true)
-    public Transaction getAllTransactionByEvent(int eventId);
+    public List<Transaction> getAllTransactionByEvent(int eventId);
 
    
     @Query(value = "select * from transaction",nativeQuery = true)
-    public Transaction getAllTransactionByReceiver(int receiverId);
-
+    public List<Transaction> getAllTransactionByReceiver(int receiverId);
 
 }
