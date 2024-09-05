@@ -26,7 +26,7 @@ public class User {
     @Column(name = "email")
     private String email;
     @Column(name = "phoneNo")
-    private int phoneNo;
+    private String phoneNo;
     @Column(name = "imageUrl")
     private String imageUrl;
 
