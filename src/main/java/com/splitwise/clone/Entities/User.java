@@ -21,9 +21,9 @@ public class User {
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "UserId")
     private int userId;
-    @Column(name = "userName")
+    @Column(name = "userName",unique = true )
     private String userName;
-    @Column(name = "email")
+    @Column(name = "email",unique = true)
     private String email;
     @Column(name = "phoneNo")
     private String phoneNo;
