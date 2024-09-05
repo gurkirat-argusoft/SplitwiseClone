@@ -25,8 +25,8 @@ public class TransactionController {
     }
 
 
-    @GetMapping("/getAll")
-    public List<Transaction> allTransactions(){
+    @GetMapping("/getAll/{userId}")
+    public List<Transaction> allTransactions(@PathVariable("userId") int userId){
         return new ArrayList<>();
     }
 
