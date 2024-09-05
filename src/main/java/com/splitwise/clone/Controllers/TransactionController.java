@@ -16,27 +16,27 @@ import com.splitwise.clone.Entities.Transaction;
 public class TransactionController {
 
     @PostMapping("/addbyreceiver/{giverId}/{receiverId}")
-    public Transaction addTransaction(@PathVariable("giverId") int giverId,@PathVariable("receiverId") int receiverId){
+    public Transaction addTransactionByReceiver(@PathVariable("giverId") int giverId,@PathVariable("receiverId") int receiverId){
         return new Transaction();
     }
-    @PostMapping("/addbyreceiver/{giverId}/{eventId}")
+    @PostMapping("/addbyevent/{giverId}/{eventId}")
     public Transaction addTransactionByEvent(@PathVariable("giverId") int giverId,@PathVariable("eventId") int eventId){
         return new Transaction();
     }
 
 
     @GetMapping("/getAll/{userId}")
-    public List<Transaction> allTransactions(@PathVariable("userId") int userId){
+    public List<Transaction> allTransactionsByUser(@PathVariable("userId") int userId){
         return new ArrayList<>();
     }
 
     @GetMapping("/getbyreceiver/{giverId}/{receiverId}")
-    public List<Transaction> geTransactionsByReceiver(@PathVariable("giverId") int giverId,@PathVariable("receiverId") int receiverId){
+    public List<Transaction> getTransactionsByReceiver(@PathVariable("giverId") int giverId,@PathVariable("receiverId") int receiverId){
         return new ArrayList<>();
     }
 
-    @GetMapping("/getbyreceiver/{giverId}/{eventId}")
-    public List<Transaction> geTransactionsByEvent(@PathVariable("giverId") int giverId,@PathVariable("eventId") int eventId){
+    @GetMapping("/getbyevent/{giverId}/{eventId}")
+    public List<Transaction> getTransactionsByEvent(@PathVariable("giverId") int giverId,@PathVariable("eventId") int eventId){
         return new ArrayList<>();
     }
 }

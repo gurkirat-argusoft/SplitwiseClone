@@ -8,6 +8,6 @@ import com.splitwise.clone.Entities.User;
 
 public interface GroupDao extends JpaRepository<Group, Integer> {
     @Query(value = "Select * from group",nativeQuery = true)
-    public User addMember(int id);
+    public User addMember(User user);
     
 }
