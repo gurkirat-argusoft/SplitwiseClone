@@ -39,4 +39,8 @@ public class Event {
     @OneToMany(mappedBy = "event", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Transaction> transactions = new ArrayList<>();
 
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinColumn(name = "groupId")
+    private Group group ;
+
 }

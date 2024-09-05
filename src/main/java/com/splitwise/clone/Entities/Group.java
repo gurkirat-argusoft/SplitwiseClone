@@ -12,6 +12,8 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.Data;
 
@@ -33,4 +35,6 @@ public class Group {
     inverseJoinColumns = {@JoinColumn(name="groupId")})
     private List<User> users = new ArrayList<>();
 
+    @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+    private List<Event> events=new ArrayList<>();
 }
