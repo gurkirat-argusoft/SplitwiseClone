@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -18,7 +19,7 @@ import com.splitwise.clone.Entities.User;
 @RequestMapping("/group")
 public class GroupController {
     @PostMapping("/create")
-    public Group createGroup(){
+    public Group createGroup(@RequestBody Group group){
         return new Group();
     }
 
