@@ -26,12 +26,13 @@ public class Transaction {
     private User giverId;
 
     @OneToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "receiverId", nullable = false)
+    @JoinColumn(name = "receiverId")
     private User receiverId;
 
+    @Column( nullable = false)
     private int amount;
 
-    @Column(name = "doneAt")
+    @Column(name = "doneAt", nullable = false)
     private LocalDateTime doneAt;
 
     @ManyToOne(fetch = FetchType.LAZY)

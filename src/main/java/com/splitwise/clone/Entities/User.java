@@ -21,11 +21,11 @@ public class User {
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "UserId")
     private int userId;
-    @Column(name = "userName",unique = true )
+    @Column(name = "userName",unique = true , nullable = false)
     private String userName;
-    @Column(name = "email",unique = true)
+    @Column(name = "email",unique = true, nullable = false)
     private String email;
-    @Column(name = "phoneNo")
+    @Column(name = "phoneNo", nullable = false)
     private String phoneNo;
     @Column(name = "imageUrl")
     private String imageUrl;

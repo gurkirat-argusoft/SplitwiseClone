@@ -15,8 +15,8 @@ import com.splitwise.clone.Entities.Transaction;
 @RequestMapping("/transaction")
 public class TransactionController {
 
-    @PostMapping("/addbyreceiver/{giverId}/{receiverId}")
-    public Transaction addTransactionByReceiver(@PathVariable("giverId") int giverId,@PathVariable("receiverId") int receiverId){
+    @PostMapping("/addbyreceiver/{giverId}/{receiverName}")
+    public Transaction addTransactionByReceiver(@PathVariable("giverId") int giverId,@PathVariable("receiverName") String receiverName){
         return new Transaction();
     }
     @PostMapping("/addbyevent/{giverId}/{eventId}")

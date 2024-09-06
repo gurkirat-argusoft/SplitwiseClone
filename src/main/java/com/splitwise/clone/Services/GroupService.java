@@ -14,9 +14,9 @@ public class GroupService {
     GroupDao groupDao;
     @Autowired
     UserDao userDao;
+
     public Group createGroup(Group group) {
-        groupDao.save(group);
-        return group;
+        return groupDao.save(group);
     }
 
     public List<Group> getAllGroups(int userId) {
@@ -47,19 +47,18 @@ public class GroupService {
         return "Deleted Group";
     }
 
-    public List<User> getUserInGroup(int groupId){
+    public List<User> getUserInGroup(int groupId) {
         return groupDao.usersInGroup(groupId);
 
     }
 
-
-    public Group addMember(int userId, String userName , int groupId){
+    public Group addMember(int userId, String userName, int groupId) {
         Optional<Group> Optionalgroup = groupDao.findById(groupId);
-        List<User> users=getUserInGroup(groupId);
+        List<User> users = getUserInGroup(groupId);
         users.add(userDao.findByUserName(userName));
-        return Optionalgroup.map(group->{
+        return Optionalgroup.map(group -> {
             group.setUsers(users);
             return groupDao.save(group);
         }).orElse(null);
     }
- }
+}

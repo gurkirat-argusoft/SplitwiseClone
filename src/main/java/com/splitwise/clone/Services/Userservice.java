@@ -16,32 +16,31 @@ public class Userservice {
     UserDao userdao;
 
     public User addUser(User user) {
-        userdao.save(user);
-        return user;
+        return userdao.save(user);
     }
 
-    public List<User> getAllUsers(){
+    public List<User> getAllUsers() {
         return new ArrayList<>(userdao.findAll());
-    } 
+    }
 
-    public Optional<User> getUser(int id ){
+    public Optional<User> getUser(int id) {
         return userdao.findById(id);
     }
 
     public User updateUser(int id, User userNew) {
         Optional<User> optionalUser = userdao.findById(id);
-    
+
         return optionalUser.map(userOld -> {
             userOld.setUserName(userNew.getUserName());
             userOld.setEmail(userNew.getEmail());
             userOld.setImageUrl(userNew.getImageUrl());
             userOld.setPhoneNo(userNew.getPhoneNo());
-            return userdao.save(userOld); 
-        }).orElse(null); 
+            return userdao.save(userOld);
+        }).orElse(null);
     }
 
-   public String deleteUser(int id){
-    userdao.deleteById(id);
-    return "Deleted user";
-   }
+    public String deleteUser(int id) {
+        userdao.deleteById(id);
+        return "Deleted user";
+    }
 }

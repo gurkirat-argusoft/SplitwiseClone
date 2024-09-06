@@ -23,11 +23,12 @@ public class Event {
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "eventId")
     private int eventId;
+    @Column( nullable = false)
     private String description;
-    @Column(name = "happenedAt")
+    @Column(name = "happenedAt",nullable = false)
     private LocalDateTime happenedAt;
     private int amount;
-    @Column(name = "splitType")
+    @Column(name = "splitType",nullable = false)
     private String splitType;
 
     @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)

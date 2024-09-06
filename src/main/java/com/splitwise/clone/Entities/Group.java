@@ -24,7 +24,7 @@ public class Group {
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "groupId")
     private int groupId;
-    @Column(name = "groupName")
+    @Column(name = "groupName", nullable = false)
     private String groupName;
     @Column(name = "imageUrl")
     private String imageUrl;
