@@ -35,8 +35,14 @@ public class TransactionController {
         return new ArrayList<>();
     }
 
-    @GetMapping("/getbyevent/{giverId}/{eventId}")
-    public List<Transaction> getTransactionsByEvent(@PathVariable("giverId") int giverId,@PathVariable("eventId") int eventId){
+    @GetMapping("/getusertransactionbyevent/{giverId}/{eventId}")
+    public List<Transaction> getUserTransactionsByEvent(@PathVariable("giverId") int giverId,@PathVariable("eventId") int eventId){
         return new ArrayList<>();
     }
+
+    @GetMapping("/getalltransactionbyevent/{eventId}")
+    public List<Transaction> getTransactionsByEvent(@PathVariable("eventId") int eventId){
+        return new ArrayList<>();
+    }
+    
 }
