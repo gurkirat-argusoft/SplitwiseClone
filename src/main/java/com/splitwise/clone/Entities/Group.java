@@ -41,5 +41,6 @@ public class Group {
     private List<User> users = new ArrayList<>();
 
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JsonIgnore
     private List<Event> events = new ArrayList<>();
 }

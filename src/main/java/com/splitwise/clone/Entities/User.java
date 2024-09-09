@@ -41,15 +41,20 @@ public class User {
     private List<Group> friendGroups = new ArrayList<>();
 
     @ManyToMany(mappedBy = "users", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private List<Event> events = new ArrayList<>();
+    @JsonBackReference
+    @JsonIgnore
+    private Set<Event> events = new HashSet<>();
 
     @OneToMany(mappedBy = "giverId", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JsonIgnore
     private List<Transaction> givenTransactions = new ArrayList<>();
 
     @OneToMany(mappedBy = "receiverId", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JsonIgnore
     private List<Transaction> receivedTransactions = new ArrayList<>();
 
     @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JsonIgnore
     @JoinTable(name = "friends", joinColumns = { @JoinColumn(name = "userId") }, inverseJoinColumns = {
             @JoinColumn(name = "friendId") })
     private Set<User> friends = new HashSet<>();

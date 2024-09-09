@@ -14,6 +14,10 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import lombok.Data;
 import java.util.*;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import java.time.*;
 
 @Entity
@@ -33,15 +37,19 @@ public class Event {
 
     @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinTable(name = "user_events", 
-    joinColumns = { @JoinColumn(name = "UserId") },
-     inverseJoinColumns = {@JoinColumn(name = "eventId") })
-    private List<User> users = new ArrayList<>();
+    joinColumns = { @JoinColumn(name = "eventId") },
+     inverseJoinColumns = {@JoinColumn(name = "userId") })
+     @JsonManagedReference
+   @JsonIgnore
+    private Set<User> users = new HashSet<>();
 
     @OneToMany(mappedBy = "event", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JsonIgnore
     private List<Transaction> transactions = new ArrayList<>();
 
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JoinColumn(name = "groupId")
+    @JoinColumn(name = "groupId" , nullable = true)
+    @JsonIgnore
     private Group group ;
 
 }

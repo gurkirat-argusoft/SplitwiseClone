@@ -25,12 +25,13 @@ public class UserController {
     Userservice userservice;
 
     @PostMapping("add")
-    public ResponseEntity<User> addUser(@RequestBody User user) {
-        try {
-            return new ResponseEntity<>(userservice.addUser(user), HttpStatus.CREATED);
-        } catch (Exception e) {
-            return new ResponseEntity("User not created.", HttpStatus.BAD_REQUEST);
-        }
+    public User addUser(@RequestBody User user) {
+        // try {
+        //     return new ResponseEntity<>(userservice.addUser(user), HttpStatus.CREATED);
+        // } catch (Exception e) {
+        //     return new ResponseEntity("User not created.", HttpStatus.BAD_REQUEST);
+        // }
+        return userservice.addUser(user);
     }
 
     @GetMapping("getall")
