@@ -1,7 +1,7 @@
 package com.splitwise.clone.Controllers;
 
 import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 import org.apache.el.stream.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.splitwise.clone.Entities.Group;
-import com.splitwise.clone.Entities.User;
 import com.splitwise.clone.Services.GroupService;
 
 @RestController
@@ -35,18 +34,23 @@ GroupService groupService;
        }
     }
 
-    @GetMapping("/getAll/{id}")
-    public ResponseEntity<List<Group>> getAllGroups(@PathVariable("id")int id){
+    @GetMapping("/getusergroups/{id}")
+    public ResponseEntity<Set<Group>> getUserGroups(@PathVariable("id")int id){
         try {
-            return new ResponseEntity<>(groupService.getAllGroups(id),HttpStatus.FOUND);
+            return new ResponseEntity<>(groupService.getUserGroups(id),HttpStatus.FOUND);
            } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
            }
     }
 
-    @GetMapping("/get/{id}")
-    public Group getGroupById(@PathVariable("id") int id){
-        return new Group();
+    @GetMapping("/getuseringroup/{id}")
+    public ResponseEntity<Object> getUserInGroup(@PathVariable("id") int groupId){
+        try {
+            return new ResponseEntity<>(groupService.getUsersInGroup(groupId),HttpStatus.FOUND);
+           } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+           }
+      
     }
 
     @PutMapping("/update/{id}")
@@ -59,8 +63,8 @@ GroupService groupService;
         return "Deleted Group";
     }
 
-    @PutMapping("/addMember/{groupId}/{userId}")
-    public User addMember(@PathVariable("groupId") int groupId,@PathVariable("userId") int userId){
-        return new User();
+    @PutMapping("/addmember/{groupId}/{userName}")
+    public Group addMember(@PathVariable("groupId") int groupId,@PathVariable("userName") String userName){
+        return groupService.addMember(userName, groupId);
     }
 }

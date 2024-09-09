@@ -2,6 +2,10 @@ package com.splitwise.clone.Entities;
 
 import java.util.*;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -30,10 +34,12 @@ public class Group {
     private String imageUrl;
 
     @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinTable(name = "user_groups", joinColumns ={@JoinColumn(name="userId")},
-    inverseJoinColumns = {@JoinColumn(name="groupId")})
+    @JoinTable(name = "user_groups", joinColumns = { @JoinColumn(name = "groupId") }, inverseJoinColumns = {
+            @JoinColumn(name = "userId") })
+    @JsonManagedReference
+    @JsonIgnore
     private List<User> users = new ArrayList<>();
 
-    @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
-    private List<Event> events=new ArrayList<>();
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<Event> events = new ArrayList<>();
 }

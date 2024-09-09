@@ -39,6 +39,11 @@ public class EventController {
         return new Event();
     }
 
+    @GetMapping("/eventmembers/{eventId}")
+    public List<User> eventMembers(@PathVariable("eventId") int eventId){
+        return new ArrayList<>();
+    }
+
     @PutMapping("/addMember/{eventId}/{userId}")
     public User addMember(@PathVariable("eventId") int eventId,@PathVariable("userId") int userId){
         return new User();
