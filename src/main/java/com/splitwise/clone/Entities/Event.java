@@ -15,6 +15,7 @@ import jakarta.persistence.OneToMany;
 import lombok.Data;
 import java.util.*;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
@@ -23,33 +24,28 @@ import java.time.*;
 @Entity
 @Data
 public class Event {
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "eventId")
-    private int eventId;
-    @Column( nullable = false)
-    private String description;
-    @Column(name = "happenedAt",nullable = false)
-    private LocalDateTime happenedAt;
-    private int amount;
-    @Column(name = "splitType",nullable = false)
-    private String splitType;
+  @Id
+  @GeneratedValue(strategy = GenerationType.AUTO)
+  @Column(name = "eventId")
+  private int eventId;
+  @Column(nullable = false)
+  private String description;
+  @Column(name = "happenedAt", nullable = false)
+  private LocalDateTime happenedAt;
+  private int amount;
+  @Column(name = "splitType", nullable = false)
+  private String splitType;
 
-    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JoinTable(name = "user_events", 
-    joinColumns = { @JoinColumn(name = "eventId") },
-     inverseJoinColumns = {@JoinColumn(name = "userId") })
-     @JsonManagedReference
-   @JsonIgnore
-    private Set<User> users = new HashSet<>();
+  @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+  @JoinTable(name = "user_events", joinColumns = { @JoinColumn(name = "eventId") }, inverseJoinColumns = {
+      @JoinColumn(name = "userId") })
+  @JsonManagedReference
+  @JsonIgnore
+  private Set<User> users = new HashSet<>();
 
-    @OneToMany(mappedBy = "event", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JsonIgnore
-    private List<Transaction> transactions = new ArrayList<>();
-
-    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JoinColumn(name = "groupId" , nullable = true)
-    @JsonIgnore
-    private Group group ;
+  @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+  @JoinColumn(name = "groupId", nullable = true)
+  @JsonIgnore
+  private Group group;
 
 }

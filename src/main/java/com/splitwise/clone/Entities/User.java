@@ -26,9 +26,9 @@ public class User {
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "UserId")
     private int userId;
-    @Column(name = "userName",unique = true , nullable = false)
+    @Column(name = "userName", unique = true, nullable = false)
     private String userName;
-    @Column(name = "email",unique = true, nullable = false)
+    @Column(name = "email", unique = true, nullable = false)
     private String email;
     @Column(name = "phoneNo", nullable = false)
     private String phoneNo;
@@ -44,14 +44,6 @@ public class User {
     @JsonBackReference
     @JsonIgnore
     private Set<Event> events = new HashSet<>();
-
-    @OneToMany(mappedBy = "giverId", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JsonIgnore
-    private List<Transaction> givenTransactions = new ArrayList<>();
-
-    @OneToMany(mappedBy = "receiverId", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JsonIgnore
-    private List<Transaction> receivedTransactions = new ArrayList<>();
 
     @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JsonIgnore

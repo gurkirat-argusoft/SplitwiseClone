@@ -40,7 +40,7 @@ public class Group {
     @JsonIgnore
     private List<User> users = new ArrayList<>();
 
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "group", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JsonIgnore
     private List<Event> events = new ArrayList<>();
 }

@@ -67,7 +67,6 @@ public class EventService {
             event.setHappenedAt(newEvent.getHappenedAt());
             event.setSplitType(newEvent.getSplitType());
             event.setUsers(newEvent.getUsers());
-            event.setTransactions(newEvent.getTransactions());
             return eventDao.save(event);
         }).orElse(null);
     }

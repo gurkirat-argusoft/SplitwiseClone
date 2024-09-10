@@ -12,6 +12,10 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToOne;
 import lombok.Data;
 import java.time.*;
+import java.util.Optional;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
 @Data
@@ -21,21 +25,18 @@ public class Transaction {
     @Column(name = "transactionId")
     private int transactionId;
 
-    @OneToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "giverId", nullable = false)
-    private User giverId;
+    @Column(unique = false, nullable = false)
+    private int giverId;
 
-    @OneToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "receiverId")
-    private User receiverId;
+    @Column(unique = false, nullable = false)
+    private int receiverId;
 
-    @Column( nullable = false)
+    @Column(nullable = false)
     private int amount;
 
     @Column(name = "doneAt", nullable = false)
     private LocalDateTime doneAt;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "eventId")
-    private Event event;
+    @Column(nullable = true)
+    private int eventId;
 }

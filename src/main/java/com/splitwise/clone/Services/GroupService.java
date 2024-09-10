@@ -50,25 +50,25 @@ public class GroupService {
     public List<User> getUsersInGroup(int groupId) {
         List<Object[]> results = groupDao.usersInGroupRaw(groupId);
         List<User> users = new ArrayList<>();
-        
+
         for (Object[] row : results) {
             User user = new User();
-            user.setUserId((int) row[0]); 
+            user.setUserId((int) row[0]);
             user.setEmail((String) row[1]);
             user.setImageUrl((String) row[2]);
             user.setPhoneNo((String) row[3]);
             user.setUserName((String) row[4]);
             users.add(user);
         }
-        
+
         return users;
     }
 
-    public Group addMember( String userName, int groupId) {
+    public Group addMember(String userName, int groupId) {
         Optional<Group> Optionalgroup = groupDao.findById(groupId);
         User newUser = userDao.findByUserName(userName);
         return Optionalgroup.map(group -> {
-            List<User> userList=group.getUsers();
+            List<User> userList = group.getUsers();
             userList.add(newUser);
             group.setUsers(userList);
             return groupDao.save(group);

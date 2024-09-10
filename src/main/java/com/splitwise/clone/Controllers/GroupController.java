@@ -23,64 +23,65 @@ import com.splitwise.clone.Services.Userservice;
 @RestController
 @RequestMapping("/group")
 public class GroupController {
-@Autowired
-GroupService groupService;
-@Autowired 
-UserDao userDao;
+    @Autowired
+    GroupService groupService;
+    @Autowired
+    UserDao userDao;
 
     @PostMapping("/create")
-    public ResponseEntity<Group> createGroup(@RequestBody Group group){
-       try {
-        return new ResponseEntity<>(groupService.createGroup(group),HttpStatus.CREATED);
-       } catch (Exception e) {
-        return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
-       }
+    public ResponseEntity<Group> createGroup(@RequestBody Group group) {
+        try {
+            return new ResponseEntity<>(groupService.createGroup(group), HttpStatus.CREATED);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+        }
     }
 
     @GetMapping("/getusergroups/{id}")
-    public ResponseEntity<Set<Group>> getUserGroups(@PathVariable("id")int id){
+    public ResponseEntity<Set<Group>> getUserGroups(@PathVariable("id") int id) {
         try {
-            return new ResponseEntity<>(groupService.getUserGroups(id),HttpStatus.FOUND);
-           } catch (Exception e) {
+            return new ResponseEntity<>(groupService.getUserGroups(id), HttpStatus.FOUND);
+        } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
-           }
+        }
     }
 
     @GetMapping("/getuseringroup/{id}")
-    public ResponseEntity<Object> getUserInGroup(@PathVariable("id") int groupId){
+    public ResponseEntity<Object> getUserInGroup(@PathVariable("id") int groupId) {
         try {
-            return new ResponseEntity<>(groupService.getUsersInGroup(groupId),HttpStatus.FOUND);
-           } catch (Exception e) {
+            return new ResponseEntity<>(groupService.getUsersInGroup(groupId), HttpStatus.FOUND);
+        } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
-           }
-      
+        }
+
     }
 
     @PutMapping("/update/{id}")
-    public ResponseEntity<Group> updateGroup(@PathVariable("id") int id ,@RequestBody Group group ){
-        if(groupService.getGroupById(id)!= null) {
-            return new ResponseEntity<>(groupService.updateGroup(id, group),HttpStatus.ACCEPTED);
-           } else {
+    public ResponseEntity<Group> updateGroup(@PathVariable("id") int id, @RequestBody Group group) {
+        if (groupService.getGroupById(id) != null) {
+            return new ResponseEntity<>(groupService.updateGroup(id, group), HttpStatus.ACCEPTED);
+        } else {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
-           }
+        }
     }
 
     @DeleteMapping("/delete/{id}")
-    public ResponseEntity<String> deleteGroup(@PathVariable("id") int id ){
-     try{
-            return new ResponseEntity<>(groupService.deleteGroup(id),HttpStatus.GONE);
-        }catch(Exception e){
-        return new ResponseEntity("Server error occured.", HttpStatus.INTERNAL_SERVER_ERROR);
+    public ResponseEntity<String> deleteGroup(@PathVariable("id") int id) {
+        try {
+            return new ResponseEntity<>(groupService.deleteGroup(id), HttpStatus.GONE);
+        } catch (Exception e) {
+            return new ResponseEntity("Server error occured.", HttpStatus.INTERNAL_SERVER_ERROR);
 
-    }
+        }
     }
 
     @PutMapping("/addmember/{groupId}/{userName}")
-    public ResponseEntity<Group> addMember(@PathVariable("groupId") int groupId,@PathVariable("userName") String userName){
-        if (groupService.getGroupById(groupId)!=null&& userDao.findByUserName(userName)!=null) {
-            return new ResponseEntity<>(groupService.addMember(userName, groupId),HttpStatus.ACCEPTED);
-        }else{
-            return new ResponseEntity("Server error occured.",HttpStatus.INTERNAL_SERVER_ERROR);
+    public ResponseEntity<Group> addMember(@PathVariable("groupId") int groupId,
+            @PathVariable("userName") String userName) {
+        if (groupService.getGroupById(groupId) != null && userDao.findByUserName(userName) != null) {
+            return new ResponseEntity<>(groupService.addMember(userName, groupId), HttpStatus.ACCEPTED);
+        } else {
+            return new ResponseEntity("Server error occured.", HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 }

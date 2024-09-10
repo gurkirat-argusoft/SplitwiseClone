@@ -34,11 +34,11 @@ public class EventController {
 
     @GetMapping("geteventsbyuser/{userId}")
     public ResponseEntity<Set<Event>> getEventsByUser(@PathVariable("userId") int userId) {
-      if (userDao.findById(userId)!= null) {
-        return new ResponseEntity<>(eventService.getAllEventsByUser(userId),HttpStatus.OK);
-      } else {
-        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-      }
+        if (userDao.findById(userId) != null) {
+            return new ResponseEntity<>(eventService.getAllEventsByUser(userId), HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
     }
 
     @PostMapping("/addevent")
@@ -51,17 +51,18 @@ public class EventController {
     }
 
     @DeleteMapping("/delete/{eventId}")
-    public ResponseEntity<String> deleteEvent(@PathVariable("eventId") int eventId){
-        try{
-            return new ResponseEntity<>(eventService.deleteEvent(eventId),HttpStatus.GONE);
-        }catch(Exception e){
-        return new ResponseEntity("Server error occured.", HttpStatus.INTERNAL_SERVER_ERROR);}
+    public ResponseEntity<String> deleteEvent(@PathVariable("eventId") int eventId) {
+        try {
+            return new ResponseEntity<>(eventService.deleteEvent(eventId), HttpStatus.GONE);
+        } catch (Exception e) {
+            return new ResponseEntity("Server error occured.", HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
     @PutMapping("/update/{eventId}")
     public ResponseEntity<Event> updateEvent(@PathVariable("eventId") int eventId, @RequestBody Event event) {
-        if (eventDao.findById(eventId)!=null) {
-            return new ResponseEntity<>(eventService.updateEvent(eventId , event),HttpStatus.CREATED);
+        if (eventDao.findById(eventId) != null) {
+            return new ResponseEntity<>(eventService.updateEvent(eventId, event), HttpStatus.CREATED);
         } else {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
@@ -69,19 +70,20 @@ public class EventController {
 
     @GetMapping("/geteventmembers/{eventId}")
     public ResponseEntity<Set<User>> getEventMembers(@PathVariable("eventId") int eventId) {
-        if (eventDao.findById(eventId)!=null) {
-            return new ResponseEntity<>(eventService.getEventMembers(eventId),HttpStatus.ACCEPTED);
+        if (eventDao.findById(eventId) != null) {
+            return new ResponseEntity<>(eventService.getEventMembers(eventId), HttpStatus.ACCEPTED);
         } else {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
 
     @PutMapping("/addmember/{eventId}/{userName}")
-    public ResponseEntity<Event> addMember(@PathVariable("eventId") int eventId, @PathVariable("userName") String userName) {
-        if (eventDao.findById(eventId)!=null && userDao.findByUserName(userName) !=null) {
-            return new ResponseEntity<>(eventService.addMember(userName, eventId),HttpStatus.CREATED);
-        }else{
-            return new ResponseEntity("Server error occured",HttpStatus.INTERNAL_SERVER_ERROR);
+    public ResponseEntity<Event> addMember(@PathVariable("eventId") int eventId,
+            @PathVariable("userName") String userName) {
+        if (eventDao.findById(eventId) != null && userDao.findByUserName(userName) != null) {
+            return new ResponseEntity<>(eventService.addMember(userName, eventId), HttpStatus.CREATED);
+        } else {
+            return new ResponseEntity("Server error occured", HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
