@@ -1,0 +1,39 @@
+.container{
+    /* margin-top: 70px; */
+    position: fixed;
+    top: 70px;
+    padding: 30px;
+}
+.profile-icon {
+    width: 25px; /* Set the desired width */
+    height: 25px; /* Set the desired height */
+    border-radius: 50%; /* Make it circular */
+    overflow: hidden; /* Hide overflow */
+    display: flex; /* Center the image */
+    justify-content: center; /* Center horizontally */
+    align-items: center; /* Center vertically */
+    margin: 5px;
+}
+
+.profile-icon img {
+    width: 100%; /* Make image fill the container */
+    height: auto; /* Maintain aspect ratio */
+    /* padding: 5px; */
+
+}
+.icon-container {
+    display: flex; /* Use flexbox to arrange items in a row */
+    flex-wrap: wrap; /* Allow items to wrap to the next line when necessary */
+}
+
+.card {
+    width: 150px; /* Set a smaller width */
+    height: auto; /* Adjust height as needed or set a specific height */
+    padding: 5px; /* Adjust padding if necessary */
+    /* margin: 10px; Adjust margin if necessary */
+    box-shadow: none;
+}
+.button-card{
+    border: 0;
+    box-shadow: none;
+}

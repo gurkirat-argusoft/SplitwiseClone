@@ -1,0 +1,35 @@
+body {
+    background-color: #f8f9fa; /* Light background for better contrast */
+
+}
+
+.container {
+    position: fixed; /* Fix the container in place */
+    top: 40px;
+    left: 0; /* Align to the left */
+    right: 0; /* Align to the right */
+    bottom: 0; /* Align to the bottom */
+    overflow: hidden; /* Prevent scrolling of the entire body */
+}
+
+.card {
+    border-radius: 10px; /* Rounded corners for cards */
+    position: relative; /* Position relative for proper layout */
+}
+
+.card-header {
+    font-weight: bold; /* Make header text bold */
+}
+
+.data-container {
+    max-height: 520px;/* Adjust height based on header size */
+    overflow-y: auto; /* Enable vertical scrolling */
+}
+
+.list-group-item {
+    transition: background-color 0.3s; /* Smooth transition for hover effect */
+}
+
+.list-group-item:hover {
+    background-color: #e9ecef; /* Light gray background on hover */
+}

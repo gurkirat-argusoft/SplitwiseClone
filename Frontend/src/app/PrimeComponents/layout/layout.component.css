@@ -1,0 +1,16 @@
+.btn{
+    margin: 5px;
+}
+
+
+.top-fixed {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1030; /* Ensure it stays above other content */
+}
+.navbar-brand{
+    color: crimson;
+    font-weight: bold;
+    font-size: x-large;
+}
