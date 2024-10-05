@@ -33,14 +33,4 @@ public class Group {
     @Column(name = "imageUrl")
     private String imageUrl;
 
-    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinTable(name = "user_groups", joinColumns = { @JoinColumn(name = "groupId") }, inverseJoinColumns = {
-            @JoinColumn(name = "userId") })
-    @JsonManagedReference
-    @JsonIgnore
-    private List<User> users = new ArrayList<>();
-
-    @OneToMany(mappedBy = "group", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JsonIgnore
-    private List<Event> events = new ArrayList<>();
 }

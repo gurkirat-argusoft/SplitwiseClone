@@ -35,17 +35,7 @@ public class Event {
   private int amount;
   @Column(name = "splitType", nullable = false)
   private String splitType;
-
-  @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-  @JoinTable(name = "user_events", joinColumns = { @JoinColumn(name = "eventId") }, inverseJoinColumns = {
-      @JoinColumn(name = "userId") })
-  @JsonManagedReference
-  @JsonIgnore
-  private Set<User> users = new HashSet<>();
-
-  @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-  @JoinColumn(name = "groupId", nullable = true)
-  @JsonIgnore
-  private Group group;
+  @Column(name="group_id",nullable = true)
+  private String groupId;
 
 }

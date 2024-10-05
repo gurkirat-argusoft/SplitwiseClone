@@ -26,6 +26,7 @@ public class Userservice {
     public Optional<User> getUser(int id) {
         return userdao.findById(id);
     }
+    public User getUserByName(String name){return userdao.findByUserName(name);}
 
     public User updateUser(int id, User userNew) {
         Optional<User> optionalUser = userdao.findById(id);

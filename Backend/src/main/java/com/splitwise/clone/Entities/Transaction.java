@@ -39,4 +39,5 @@ public class Transaction {
 
     @Column(nullable = true)
     private int eventId;
+    private String description;
 }

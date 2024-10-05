@@ -3,14 +3,7 @@ package com.splitwise.clone.Controllers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import com.splitwise.clone.Entities.Event;
 import com.splitwise.clone.Entities.User;
@@ -24,6 +17,7 @@ import java.util.*;
 @RestController
 @Data
 @RequestMapping("/event")
+@CrossOrigin(origins = "http://localhost:4200")
 public class EventController {
     @Autowired
     EventService eventService;
@@ -34,9 +28,9 @@ public class EventController {
 
     @GetMapping("geteventsbyuser/{userId}")
     public ResponseEntity<Set<Event>> getEventsByUser(@PathVariable("userId") int userId) {
-        if (userDao.findById(userId) != null) {
+        try{
             return new ResponseEntity<>(eventService.getAllEventsByUser(userId), HttpStatus.OK);
-        } else {
+        } catch(Exception e) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
@@ -61,26 +55,26 @@ public class EventController {
 
     @PutMapping("/update/{eventId}")
     public ResponseEntity<Event> updateEvent(@PathVariable("eventId") int eventId, @RequestBody Event event) {
-        if (eventDao.findById(eventId) != null) {
+        try{
             return new ResponseEntity<>(eventService.updateEvent(eventId, event), HttpStatus.CREATED);
-        } else {
+        } catch(Exception e) {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
     @GetMapping("/geteventmembers/{eventId}")
     public ResponseEntity<Set<User>> getEventMembers(@PathVariable("eventId") int eventId) {
-        if (eventDao.findById(eventId) != null) {
+        try{
             return new ResponseEntity<>(eventService.getEventMembers(eventId), HttpStatus.ACCEPTED);
-        } else {
+        } catch(Exception e){
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
 
-    @PutMapping("/addmember/{eventId}/{userName}")
-    public ResponseEntity<Event> addMember(@PathVariable("eventId") int eventId,
+    @PostMapping("/addmember/{eventId}/{userName}")
+    public ResponseEntity<Optional<Event>> addMember(@PathVariable("eventId") int eventId,
             @PathVariable("userName") String userName) {
-        if (eventDao.findById(eventId) != null && userDao.findByUserName(userName) != null) {
+        if (userDao.findByUserName(userName) != null) {
             return new ResponseEntity<>(eventService.addMember(userName, eventId), HttpStatus.CREATED);
         } else {
             return new ResponseEntity("Server error occured", HttpStatus.INTERNAL_SERVER_ERROR);

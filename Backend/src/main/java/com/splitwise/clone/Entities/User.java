@@ -4,7 +4,6 @@ import java.util.*;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
@@ -16,7 +15,6 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
-import jakarta.persistence.OneToMany;
 import lombok.Data;
 
 @Entity
@@ -34,21 +32,22 @@ public class User {
     private String phoneNo;
     @Column(name = "imageUrl")
     private String imageUrl;
+    private String password;
 
-    @ManyToMany(mappedBy = "users", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JsonBackReference
-    @JsonIgnore
-    private List<Group> friendGroups = new ArrayList<>();
+    // @ManyToMany(mappedBy = "users", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    // @JsonBackReference
+    // @JsonIgnore
+    // private List<Group> friendGroups = new ArrayList<>();
 
-    @ManyToMany(mappedBy = "users", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JsonBackReference
-    @JsonIgnore
-    private Set<Event> events = new HashSet<>();
+    // @ManyToMany(mappedBy = "users", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    // @JsonBackReference
+    // @JsonIgnore
+    // private Set<Event> events = new HashSet<>();
 
-    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JsonIgnore
-    @JoinTable(name = "friends", joinColumns = { @JoinColumn(name = "userId") }, inverseJoinColumns = {
-            @JoinColumn(name = "friendId") })
-    private Set<User> friends = new HashSet<>();
+    // @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    // @JsonIgnore
+    // @JoinTable(name = "friends", joinColumns = { @JoinColumn(name = "userId") }, inverseJoinColumns = {
+    //         @JoinColumn(name = "friendId") })
+    // private Set<User> friends = new HashSet<>();
 
 }

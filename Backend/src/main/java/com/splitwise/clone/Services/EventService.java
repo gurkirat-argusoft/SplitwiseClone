@@ -4,7 +4,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.*;
 import com.splitwise.clone.Entities.Event;
-import com.splitwise.clone.Entities.Group;
 import com.splitwise.clone.Entities.User;
 import com.splitwise.clone.Repositories.EventDao;
 import com.splitwise.clone.Repositories.UserDao;
@@ -26,15 +25,10 @@ public class EventService {
         return "Event deleted";
     }
 
-    public Event addMember(String userName, int eventId) {
-        Optional<Event> Optionalevent = eventDao.findById(eventId);
-        User newUser = userDao.findByUserName(userName);
-        return Optionalevent.map(event -> {
-            Set<User> userList = event.getUsers();
-            userList.add(newUser);
-            event.setUsers(userList);
-            return eventDao.save(event);
-        }).orElse(null);
+    public Optional<Event> addMember(String userName, int eventId) {
+        User user=userDao.findByUserName(userName);
+        eventDao.addMember(user.getUserId(), eventId);
+        return eventDao.findById(eventId);
     }
 
     public Set<User> getEventMembers(int eventId) {
@@ -53,7 +47,10 @@ public class EventService {
 
         return users;
     }
-
+    public String deleteMember(int userId,int eventId){
+        eventDao.deleteMember(eventId, userId);
+        return "Member deleted";
+    }
     public Set<Event> getAllEventsByUser(int userId) {
         return eventDao.eventByUser(userId);
     }
@@ -63,10 +60,10 @@ public class EventService {
         return optionalEvent.map(event -> {
             event.setAmount(newEvent.getAmount());
             event.setDescription(newEvent.getDescription());
-            event.setGroup(newEvent.getGroup());
+            // event.setGroup(newEvent.getGroup());
             event.setHappenedAt(newEvent.getHappenedAt());
             event.setSplitType(newEvent.getSplitType());
-            event.setUsers(newEvent.getUsers());
+            // event.setUsers(newEvent.getUsers());
             return eventDao.save(event);
         }).orElse(null);
     }

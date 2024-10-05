@@ -36,8 +36,6 @@ public class GroupService {
         return optionalGroup.map(oldGroup -> {
             oldGroup.setGroupName(newGroup.getGroupName());
             oldGroup.setImageUrl(newGroup.getImageUrl());
-            oldGroup.setEvents(newGroup.getEvents());
-            oldGroup.setUsers(newGroup.getUsers());
             return groupDao.save(oldGroup);
         }).orElse(null);
     }
@@ -64,14 +62,14 @@ public class GroupService {
         return users;
     }
 
-    public Group addMember(String userName, int groupId) {
-        Optional<Group> Optionalgroup = groupDao.findById(groupId);
-        User newUser = userDao.findByUserName(userName);
-        return Optionalgroup.map(group -> {
-            List<User> userList = group.getUsers();
-            userList.add(newUser);
-            group.setUsers(userList);
-            return groupDao.save(group);
-        }).orElse(null);
+    public Optional<Group> addMember(String userName, int groupId) {
+        User user=userDao.findByUserName(userName);
+        groupDao.addMember(groupId, user.getUserId());
+       return groupDao.findById(groupId);
+    }
+
+    public String deleteMember(int userId , int groupId){
+        groupDao.deleteMember(groupId, userId);
+        return "user deleted from group";
     }
 }
