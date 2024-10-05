@@ -1,27 +1,30 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="group-page.component.css"> <!-- Link to external CSS -->
 </head>
+
 <body>
     <div class="container mt-5">
         <div class="card-header text-white card shadow-sm heading">
             <div class="header-content">
-                <h5 class="mb-0">Group name</h5>
+                <h5 class="mb-0">{{currentGroup.groupName}}</h5>
                 <div class="icon-buttons">
                     <!-- Edit Icon -->
                     <button class="icon-button" title="Edit">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20" fill="#fff">
-                            <path d="M3 17.25V21h3.75l11.39-11.39-3.75-3.75L3 17.25zM20.71 7.04a1 1 0 0 0 0-1.41l-2.34-2.34a1 1 0 0 0-1.41 0l-1.42 1.42 3.75 3.75 1.42-1.42z"/>
+                            <path
+                                d="M3 17.25V21h3.75l11.39-11.39-3.75-3.75L3 17.25zM20.71 7.04a1 1 0 0 0 0-1.41l-2.34-2.34a1 1 0 0 0-1.41 0l-1.42 1.42 3.75 3.75 1.42-1.42z" />
                         </svg>
                     </button>
                     <!-- Delete Icon -->
-                    <button class="icon-button" title="Delete">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20" fill="#fff">
-                            <path d="M6 19c0 .55.45 1 1 1h10c.55 0 1-.45 1-1V7H6v12zm2-14h8V4H8v1zm4-2C9.79 2 8 .79 8 .79S6 .79 6 .79C6 .79 4 .79 4 .79S2 .79 2 .79C2 .79 .79 4 .79S2 .79S4 .79S4 .79S6 .79S6 .79z"/>
+                    <button class="removed-button" title="Remove" >
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20" fill="red">
+                            <path d="M3 6h18v2H3zm0 4h18v12a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V10zm2 2v10h12V12H5z"/>
                         </svg>
                     </button>
                 </div>
@@ -38,16 +41,20 @@
                     <div class="card-body data-container">
                         <ul class="list-group list-group-flush">
                             <!-- Sample Data -->
-                            <li> 
-                                <div class="icon-container">
+                            @for (group of userGroups; track $index) {
+                            <li>
+                                <div class="icon-container" [routerLink]="['/group', 'groupPage', group.groupId]"
+                                    (click)="onGroupClick(group.groupId)">
                                     <div class="profile-icon">
-                                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/18/Lionel-Messi-Argentina-2022-FIFA-World-Cup_sharpness.jpg/1200px-Lionel-Messi-Argentina-2022-FIFA-World-Cup_sharpness.jpg"
-                                            alt="User Profile Picture" />
-                                    </div> 
-                                    <span class="name-span">Group name</span>
+                                        <img [src]="group.imageUrl ? group.imageUrl : 'https://images.pexels.com/photos/853168/pexels-photo-853168.jpeg?auto=compress&cs=tinysrgb&w=600'"
+                                            class="card-img-top" alt="Group Image"
+                                            (error)="group.imageUrl = 'https://images.pexels.com/photos/853168/pexels-photo-853168.jpeg?auto=compress&cs=tinysrgb&w=600'" />
+                                    </div>
+                                    <span class="name-span">{{group.groupName}}</span>
                                 </div>
                             </li>
                             <!-- More list items... -->
+                            }
                         </ul>
                     </div>
                 </div>
@@ -57,7 +64,7 @@
             <div class="col-md-4 mb-4 center-col">
                 <div class="card shadow-sm">
                     <div class="card-header center-header text-white">
-                        <h5 class="mb-0">Group Transactions</h5>
+                        <h5 class="mb-0">Group Events</h5>
                     </div>
                     <div class="card-body data-container">
                         <ul class="list-group list-group-flush">
@@ -80,7 +87,7 @@
                             <li class="list-group-item">Friend A - $50</li>
                             <li class="list-group-item">Friend A - $50</li>
                             <li class="list-group-item">Friend A - $50</li>
-                            
+
                         </ul>
                     </div>
                 </div>
@@ -89,22 +96,40 @@
             <!-- Third Column Card -->
             <div class="col-md-4 mb-4 right-col">
                 <div class="card shadow-sm">
-                    <div class="card-header right-header text-white"> 
-                        <h5 class="mb-0">Members</h5> 
+                    <div class="card-header right-header text-white">
+                        <h5 class="mb-0">Members</h5>
+                        <div class="add-button">
+                            <button class="add-button" title="Add">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16"
+                                    fill="#fff"> <!-- Reduced size -->
+                                    <path d="M12 2v20M2 12h20" stroke="#fff" stroke-width="3" stroke-linecap="round" />
+                                    <!-- Increased stroke width -->
+                                </svg>
+                            </button>
+                        </div>
                     </div>
                     <div class="card-body data-container">
                         <ul class="list-group list-group-flush">
                             <!-- Sample Data for Group Transactions -->
-                           <li> 
-                               <div class="icon-container">
-                                   <div class="profile-icon">
-                                       <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/18/Lionel-Messi-Argentina-2022-FIFA-World-Cup_sharpness.jpg/1200px-Lionel-Messi-Argentina-2022-FIFA-World-Cup_sharpness.jpg"
-                                           alt="User Profile Picture" />
-                                   </div> 
-                                   <span class="name-span">name</span>
-                               </div>
-                           </li>
-                           <!-- More list items... -->
+                            @for (friend of groupMembers; track $index) {
+                            <li>
+                                <div class="icon1-container">
+                                    <div class="profile-icon">
+                                        <img [src]="friend.imageUrl ? friend.imageUrl:'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSmpoQaaw13BKAmYv1iRPzkz9AkM0ZskCqK_g&s'"
+                                            alt="User"
+                                            (error)="friend.imageUrl = 'https://images.pexels.com/photos/853168/pexels-photo-853168.jpeg?auto=compress&cs=tinysrgb&w=600'" />
+
+                                    </div>
+                                    <span class="name-span">{{friend.userName}}</span>
+                                    <button class="remove-button" title="Remove" >
+                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20" fill="red">
+                                            <path d="M3 6h18v2H3zm0 4h18v12a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V10zm2 2v10h12V12H5z"/>
+                                        </svg>
+                                    </button>
+                                </div>
+                            </li>
+                            <!-- More list items... -->
+                            }
                         </ul>
                     </div>
                 </div>
@@ -116,4 +141,5 @@
     <!-- Link to your JavaScript if needed -->
     <!-- <script src="script.js"></script> -->
 </body>
+
 </html>

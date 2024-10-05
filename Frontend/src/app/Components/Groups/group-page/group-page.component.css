@@ -1,116 +1,194 @@
 body {
-    background-color: #f8f9fa; /* Light background for better contrast */
-
+  background-color: #f8f9fa; /* Light background for better contrast */
 }
 
 .container {
-    position: fixed; /* Fix the container in place */
-    top: 40px;
-    left: 0; /* Align to the left */
-    right: 0; /* Align to the right */
-    bottom: 0; /* Align to the bottom */
-    overflow: hidden; /* Prevent scrolling of the entire body */
+  position: fixed; /* Fix the container in place */
+  top: 40px;
+  left: 0; /* Align to the left */
+  right: 0; /* Align to the right */
+  bottom: 0; /* Align to the bottom */
+  overflow: hidden; /* Prevent scrolling of the entire body */
 }
 
 .card {
-    border-radius: 10px; /* Rounded corners for cards */
-    position: relative; /* Position relative for proper layout */
-    height: 500px;
+  border-radius: 10px; /* Rounded corners for cards */
+  position: relative; /* Position relative for proper layout */
+  height: 500px;
 }
 
 .card-header {
-    font-weight: bold; /* Make header text bold */
+  font-weight: bold; /* Make header text bold */
 }
 
 .data-container {
-    max-height: 520px;/* Adjust height based on header size */
-    overflow-y: auto; /* Enable vertical scrolling */
-    scrollbar-width: none; /* Hide scrollbar for Firefox */
-
+  max-height: 520px; /* Adjust height based on header size */
+  overflow-y: auto; /* Enable vertical scrolling */
+  scrollbar-width: none; /* Hide scrollbar for Firefox */
 }
 
 .list-group-item {
-    transition: background-color 0.3s; /* Smooth transition for hover effect */
+  transition: background-color 0.3s; /* Smooth transition for hover effect */
 }
 
 .list-group-item:hover {
-    background-color: #e9ecef; /* Light gray background on hover */
+  background-color: #e9ecef; /* Light gray background on hover */
 }
-.left-col{
-    width: 250px;
-
+.left-col {
+  width: 250px;
 }
-.right-col{
-    width: 250px;
+.right-col {
+  width: 250px;
 }
-.center-col{
-    width: 800px;
+.center-col {
+  width: 800px;
 }
-.heading{
-    font-size:xx-large;
-    color: green;
-    font-weight: bold;
-    height: 45px;
-margin-bottom: 15px;
-margin-right: 20px;
-background-color:  rgb(9, 79, 107);
-display: flex;
+.heading {
+  font-size: xx-large;
+  color: green;
+  font-weight: bold;
+  height: 45px;
+  margin-bottom: 15px;
+  margin-right: 20px;
+  background-color: rgb(9, 79, 107);
+  display: flex;
 }
 
 .profile-icon img {
-    width: 100%; /* Make image fill the container */
-    height: auto; /* Maintain aspect ratio */
-    /* padding: 5px; */
-
+  width: 100%; /* Make image fill the container */
+  height: auto; /* Maintain aspect ratio */
+  /* padding: 5px; */
 }
 .icon-container {
-    display: flex; /* Use flexbox to arrange items in a row */
-    flex-wrap: wrap; /* Allow items to wrap to the next line when necessary */
+  display: flex; /* Use flexbox to arrange items in a row */
+  flex-wrap: wrap; /* Allow items to wrap to the next line when necessary */
+}
+.icon1-container {
+  display: flex; /* Use flexbox to arrange items in a row */
+  flex-wrap: wrap; /* Allow items to wrap to the next line when necessary */
+  justify-content: space-between;
 }
 .profile-icon {
-    width: 25px; /* Set the desired width */
-    height: 25px; /* Set the desired height */
-    border-radius: 50%; /* Make it circular */
-    overflow: hidden; /* Hide overflow */
-    display: flex; /* Center the image */
-    justify-content: center; /* Center horizontally */
-    align-items: center; /* Center vertically */
-    margin: 5px;
+  width: 30px; /* Set the desired width */
+  height: 30px; /* Set the desired height */
+  border-radius: 50%; /* Make it circular */
+  overflow: hidden; /* Hide overflow */
+  display: flex; /* Center the image */
+  justify-content: center; /* Center horizontally */
+  align-items: center; /* Center vertically */
+  margin: 5px;
+  border: 2px solid rgb(1, 92, 153);
 }
 .list-group {
-    list-style-type: none; /* Remove bullets from list items */
-    padding: 0; /* Remove default padding */
-    margin: 0; /* Remove default margin */
+  list-style-type: none; /* Remove bullets from list items */
+  padding: 0; /* Remove default padding */
+  margin: 0; /* Remove default margin */
 }
-.name-span{
-    padding: 5px;
+.name-span {
+  padding: 5px;
 }
-.right-header{
-    background-color: rgb(42, 200, 221);
+.right-header {
+  background-color: rgb(42, 200, 221);
+  display: flex;
+  justify-content: space-between;
 }
-.center-header{
-    background-color: rgb(42, 200, 221);
+.center-header {
+  background-color: rgb(42, 200, 221);
 }
-.left-header{
-    background-color: rgb(42, 200, 221);
+.left-header {
+  background-color: rgb(42, 200, 221);
 }
 .icon-buttons {
-    display: flex; /* Use flexbox for icon buttons */
+  display: flex; /* Use flexbox for icon buttons */
 }
 
 .icon-button {
-    background-color: transparent; /* Transparent background */
-    border: none; /* No border */
-    cursor: pointer; /* Pointer cursor on hover */
-    margin-left: 10px; /* Space between buttons */
-
+  background-color: transparent; /* Transparent background */
+  border: none; /* No border */
+  cursor: pointer; /* Pointer cursor on hover */
+  margin-left: 10px; /* Space between buttons */
 }
 
 .icon-button svg {
-    fill: #faf9f9; /* Set icon color */
-    margin-bottom: 28px;
+  fill: #faf9f9; /* Set icon color */
+  margin-bottom: 28px;
 }
-.header-content{
-    display: flex;
-    justify-content: space-between;
+.header-content {
+  display: flex;
+  justify-content: space-between;
+}
+.icon-button:hover svg{
+    fill: rgb(140, 224, 133);
+}
+.add-buttons {
+  display: flex; /* Use flexbox for icon buttons */
+}
+
+.add-button {
+  background-color: transparent; /* Transparent background */
+  border: none; /* No border */
+  cursor: pointer; /* Pointer cursor on hover */
+}
+
+.add-button svg {
+  fill: #faf9f9; /* Set icon color */
+}
+.add-button {
+  display: flex; /* Use flexbox for alignment */
+  align-items: center; /* Center vertically */
+  font-weight: bolder;
+}
+.add-button:hover svg{
+    fill: #5bb857;
+}
+.add-button svg {
+  margin-left: 5px; /* Space between text and icon */
+}
+
+.right-header h5 {
+  font-weight: bold; /* Make header bold */
+}
+.remove-button {
+  background-color: transparent; /* Transparent background */
+  border: none; /* No border */
+  cursor: pointer; /* Pointer cursor on hover */
+  margin-left: 10px; /* Space between name and button */
+  padding: 0; /* Remove padding */
+  align-items: center;
+}
+
+.remove-button svg {
+  fill: red; /* Red icon color */
+  transition: fill 0.3s; /* Smooth transition for hover effect */
+  margin-bottom: 15px;
+}
+
+.remove-button:hover svg {
+  fill: darkred; /* Darker red on hover */
+}
+
+.removed-button {
+  background-color: transparent; /* Transparent background */
+  border: none; /* No border */
+  cursor: pointer; /* Pointer cursor on hover */
+  margin-left: 10px; /* Space between name and button */
+  padding: 0; /* Remove padding */
+  align-items: center;
+}
+
+.removed-button svg {
+  fill: red; /* Red icon color */
+  transition: fill 0.3s; /* Smooth transition for hover effect */
+  margin-bottom: 30px;
+}
+
+.removed-button:hover svg {
+  fill: darkred; /* Darker red on hover */
+}
+.btn{
+  padding:10px;
+  margin:10px;
+}
+.buttons{
+  align-items:self-end;
 }

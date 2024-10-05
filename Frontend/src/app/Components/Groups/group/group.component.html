@@ -10,13 +10,13 @@
 <body>
     <div class="container">
         <div class="search-container">
-            <input type="text" id="search-input" placeholder="Search groups by name...">
-            <button class="btn btn-outline-success" type="submit">Search</button>
+            <input type="text" id="search-input" placeholder="Search groups by name..." [(ngModel)]="searchInput">
+            <button class="btn btn-outline-success" type="button" (click)="searchGroups()">Search</button>
         </div>
         <div class="scrollable-container"> <!-- New scrollable container -->
             <div class="line">
-                @for (group of groups; track $index) {
-                <div class="card" routerLink="groupPage" (click)="onRoute(group.groupId)">
+                @for (group of filteredGroups; track $index) { <!-- Use filteredGroups instead of groups -->
+                <div class="card" routerLink="groupPage/{{group.groupId}}">
                     <img 
                     [src]="group.imageUrl ? group.imageUrl : 'https://images.pexels.com/photos/853168/pexels-photo-853168.jpeg?auto=compress&cs=tinysrgb&w=600'" 
                     class="card-img-top" 
@@ -24,20 +24,33 @@
                     (error)="group.imageUrl = 'https://images.pexels.com/photos/853168/pexels-photo-853168.jpeg?auto=compress&cs=tinysrgb&w=600'" />
                     <div class="card-body">
                         <h5 class="card-title">{{group.groupName}}</h5>
+                        
                         <!-- user icon -->
                         <div class="icon-container">
                             @for (user of group.users; track $index) {
                             <div class="profile-icon">
-                                <img [src]='user.imageUrl'
-                                    alt="User" />
+                                <img [src]="user.imageUrl ? user.imageUrl:'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSmpoQaaw13BKAmYv1iRPzkz9AkM0ZskCqK_g&s'"
+                                    alt="User"
+                                    (error)="user.imageUrl = 'https://images.pexels.com/photos/853168/pexels-photo-853168.jpeg?auto=compress&cs=tinysrgb&w=600'"/>
                             </div>
                         }
-                            <!-- Add more profile icons as needed -->
                         </div>
-                        <!-- <a href="#" class="btn btn-primary">Go somewhere</a> -->
                     </div>
                 </div>
-            }
+                }
+                <!-- Display message if no results found -->
+                <div *ngIf="noResultsFound" class="no-results-message">
+                    <div>
+                        <h3>❌ No Groups Found ❌</h3>
+                        <p>
+                            We couldn't find any groups matching your search criteria. 
+                            <br>Try searching with different keywords! 🌟
+                        </p>
+                        <p>
+                            📅 Explore other groups or create your own! ✨
+                        </p>
+                        <a (click)="reload()" class="back-link"> &#x2B05; Back</a>                    </div>
+                </div>
             </div>
         </div>
     </div>

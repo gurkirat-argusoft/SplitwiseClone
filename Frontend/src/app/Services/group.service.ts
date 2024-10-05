@@ -9,8 +9,7 @@ import { User } from '../Entites/user';
   providedIn: 'root'
 })
 export class GroupService {
-   defaultUser = new User(0, '', '', '', '');
-  public usersInGroup$: BehaviorSubject<Set<User>> = new BehaviorSubject<Set<User>>(new Set<User>());
+  groupId$:BehaviorSubject<number>=new BehaviorSubject<number>(0);
 
   private apiUrl = Constants.GROUP_API; // Update the port if needed
 
@@ -25,7 +24,9 @@ export class GroupService {
   getUserGroups(userId: number): Observable<Set<Group>> {
     return this.http.get<Set<Group>>(`${this.apiUrl}/getusergroups/${userId}`);
   }
-
+  getGroupById(groupId: number): Observable<Group> {
+    return this.http.get<Group>(`${this.apiUrl}/getgroup/${groupId}`);
+  }
   // Get users in a specific group
   getUsersInGroup(groupId: number): Observable<any> {
     return this.http.get(`${this.apiUrl}/getuseringroup/${groupId}`);

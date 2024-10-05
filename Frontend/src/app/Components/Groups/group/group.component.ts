@@ -4,42 +4,50 @@ import { Group } from '../../../Entites/group';
 import { GroupService } from '../../../Services/group.service';
 import { CommonModule } from '@angular/common';
 import { User } from '../../../Entites/user';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-group',
   standalone: true,
-  imports: [RouterLink, RouterModule, RouterOutlet, CommonModule],
+  imports: [RouterLink, RouterModule, RouterOutlet, CommonModule,FormsModule],
   templateUrl: './group.component.html',
   styleUrl: './group.component.css'
 })
 export class GroupComponent {
   groups: Set<Group> = new Set();
-  constructor(private groupService: GroupService) { }
+  filteredGroups: Set<Group> = new Set();
+  userId: any = localStorage.getItem('loginUser');
+  searchInput: string = '';
+  noResultsFound: boolean = false; // New property to track search results
+
+  constructor(private groupService: GroupService) {}
 
   ngOnInit(): void {
-    this.loadUserGroups(Number(localStorage.getItem('loginUser'))); // Replace with actual user ID
+    this.loadUserGroups(Number(localStorage.getItem('loginUser')));
   }
 
   loadUserGroups(userId: number): void {
     this.groupService.getUserGroups(userId).subscribe(
-      (data: Set<Group>) => { // Correctly define the parameter here
-        this.groups = data; // Assign the data to this.groups
-        // Fetch users for each group
+      (data: Set<Group>) => {
+        this.groups = data;
+        this.filteredGroups = new Set(data);
+        this.noResultsFound = false; // Reset on load
         data.forEach(group => {
           this.loadUsersInGroup(group.groupId);
-        },
-          (error:any) => {
-            console.error('Error fetching user groups', error);
-          }
-        );
-      });}
+        });
+      },
+      (error: any) => {
+        console.error('Error fetching user groups', error);
+      }
+    );
+  }
 
   loadUsersInGroup(groupId: number): void {
     this.groupService.getUsersInGroup(groupId).subscribe(
       (users: Set<User>) => {
         const group = Array.from(this.groups).find(g => g.groupId === groupId);
         if (group) {
-          group.users = users; // Assign fetched users to the corresponding group 
+          group.users = users;
         }
       },
       (error) => {
@@ -48,19 +56,22 @@ export class GroupComponent {
     );
   }
 
-  sendUserOfGroup(groupId: number): void {
-    this.groupService.getUsersInGroup(groupId).subscribe(
-      (users: Set<User>) => {
-        // Send the fetched users to usersInGroup$
-        this.groupService.usersInGroup$.next(users);
-      },
-      (error) => {
-        console.error('Error fetching users in group', error);
-      }
-    );
+  searchGroups(): void {
+    if (this.searchInput) {
+      const searchLower = this.searchInput.toLowerCase();
+      const filteredArray = Array.from(this.groups).filter(group =>
+        group.groupName.toLowerCase().includes(searchLower)
+      );
+      this.filteredGroups = new Set(filteredArray);
+      this.noResultsFound = filteredArray.length === 0; // Update noResultsFound based on filter
+    } else {
+      this.filteredGroups = new Set(this.groups);
+      this.noResultsFound = false; // Reset if input is empty
+    }
   }
-
-  onRoute(groupId:number){
-    this.sendUserOfGroup(groupId);
+  reload(){
+    this.noResultsFound=false;
+    this.searchInput='';
+    this.loadUserGroups(Number(localStorage.getItem('loginUser')));
   }
 }
