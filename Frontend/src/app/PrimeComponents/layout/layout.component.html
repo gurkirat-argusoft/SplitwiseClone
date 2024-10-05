@@ -13,16 +13,17 @@
             <a class="nav-link active" aria-current="page" routerLink="group">Groups</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link active" aria-current="page" routerLink="">Friends</a>
+            <a class="nav-link active" aria-current="page" routerLink="friends">Friends</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link active" aria-current="page" routerLink="">History</a>
+            <a class="nav-link active" aria-current="page" routerLink="history">History</a>
           </li>
         </ul>
-        <div class="d-flex" role="search">
+        <div class="d-flex" >
+         
           <button class="btn btn-outline-success" type="submit">Add Expense</button>
 
-            <button class="btn btn-outline-danger" type="submit">LogOut</button>
+            <button class="btn btn-outline-danger" type="submit" (click)="onLogout()">LogOut</button>
         </div>
       </div>
     </div>

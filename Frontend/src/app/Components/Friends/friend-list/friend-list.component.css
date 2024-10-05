@@ -6,28 +6,6 @@
     padding: 30px; /* Padding inside the container */
     max-width: 2000px; /* Optional: set a max-width for larger screens */
 }
-.profile-icon {
-    width: 25px; /* Set the desired width */
-    height: 25px; /* Set the desired height */
-    border-radius: 50%; /* Make it circular */
-    overflow: hidden; /* Hide overflow */
-    display: flex; /* Center the image */
-    justify-content: center; /* Center horizontally */
-    align-items: center; /* Center vertically */
-    margin: 5px;
-}
-
-.profile-icon img {
-    width: 100%; /* Make image fill the container */
-    height: auto; /* Maintain aspect ratio */
-    /* padding: 5px; */
-
-}
-.icon-container {
-    display: flex; /* Use flexbox to arrange items in a row */
-    flex-wrap: wrap; /* Allow items to wrap to the next line when necessary */
-}
-
 .card {
     width: 14rem; /* Set a smaller width */
     height: auto; /* Adjust height as needed or set a specific height */
@@ -36,10 +14,6 @@
     box-shadow: none;
     display: flex; /* Use flexbox to arrange items in a row */
     flex-wrap: wrap;
-}
-.button-card{
-    border: 0;
-    box-shadow: none;
 }
 body{
     background-color: #f8f9fa; /* Light background for better contrast */

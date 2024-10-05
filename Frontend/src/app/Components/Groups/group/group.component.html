@@ -9,30 +9,37 @@
 
 <body>
     <div class="container">
-
-
-        <div class="card" routerLink="groupPage" style="width: 18rem;">
-            <img src="https://images.pexels.com/photos/853168/pexels-photo-853168.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
-                class="card-img-top" alt="this is group image">
-            <div class="card-body">
-                <h5 class="card-title">Group Name</h5>
-                <!-- user icon -->
-                <div class="icon-container">
-                    <div class="profile-icon">
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/18/Lionel-Messi-Argentina-2022-FIFA-World-Cup_sharpness.jpg/1200px-Lionel-Messi-Argentina-2022-FIFA-World-Cup_sharpness.jpg"
-                            alt="User Profile Picture 1" />
+        <div class="search-container">
+            <input type="text" id="search-input" placeholder="Search groups by name...">
+            <button class="btn btn-outline-success" type="submit">Search</button>
+        </div>
+        <div class="scrollable-container"> <!-- New scrollable container -->
+            <div class="line">
+                @for (group of groups; track $index) {
+                <div class="card" routerLink="groupPage" (click)="onRoute(group.groupId)">
+                    <img 
+                    [src]="group.imageUrl ? group.imageUrl : 'https://images.pexels.com/photos/853168/pexels-photo-853168.jpeg?auto=compress&cs=tinysrgb&w=600'" 
+                    class="card-img-top" 
+                    alt="Group Image"
+                    (error)="group.imageUrl = 'https://images.pexels.com/photos/853168/pexels-photo-853168.jpeg?auto=compress&cs=tinysrgb&w=600'" />
+                    <div class="card-body">
+                        <h5 class="card-title">{{group.groupName}}</h5>
+                        <!-- user icon -->
+                        <div class="icon-container">
+                            @for (user of group.users; track $index) {
+                            <div class="profile-icon">
+                                <img [src]='user.imageUrl'
+                                    alt="User" />
+                            </div>
+                        }
+                            <!-- Add more profile icons as needed -->
+                        </div>
+                        <!-- <a href="#" class="btn btn-primary">Go somewhere</a> -->
                     </div>
-                    <div class="profile-icon">
-                        <img src="https://images.pexels.com/photos/853168/pexels-photo-853168.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
-                            alt="User Profile Picture 2" />
-                    </div>
-                    <!-- Add more profile icons as needed -->
                 </div>
-                <!-- <a href="#" class="btn btn-primary">Go somewhere</a> -->
+            }
             </div>
         </div>
-
-    
     </div>
 </body>
 

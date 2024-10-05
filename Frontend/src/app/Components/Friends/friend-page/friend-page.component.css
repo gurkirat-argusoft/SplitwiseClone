@@ -53,7 +53,7 @@ body {
     height: 45px;
 margin-bottom: 15px;
 margin-right: 20px;
-background-color:  rgb(9, 79, 107);
+background-color: green;
 display: flex;
 }
 
@@ -86,13 +86,13 @@ display: flex;
     padding: 5px;
 }
 .right-header{
-    background-color: rgb(42, 200, 221);
+    background-color: rgb(34, 175, 53);
 }
 .center-header{
-    background-color: rgb(42, 200, 221);
+    background-color: rgb(34, 175, 53);
 }
 .left-header{
-    background-color: rgb(42, 200, 221);
+    background-color: rgb(34, 175, 53);
 }
 .icon-buttons {
     display: flex; /* Use flexbox for icon buttons */

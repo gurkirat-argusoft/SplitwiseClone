@@ -24,6 +24,8 @@ body {
 .data-container {
     max-height: 520px;/* Adjust height based on header size */
     overflow-y: auto; /* Enable vertical scrolling */
+    scrollbar-width: none; /* Hide scrollbar for Firefox */
+
 }
 
 .list-group-item {

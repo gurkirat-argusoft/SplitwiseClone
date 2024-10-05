@@ -1,1 +1,22 @@
-<p>login works!</p>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div class="loginform">
+    <h2>Login</h2>
+    <form action="" autocomplete="off">
+        <p>Username</p>
+        <input type="text" [(ngModel)]="user.userName" name="username" placeholder="Username">
+        <p>Password</p>
+        <input type="password" [(ngModel)]="user.password" name="password" placeholder="Password">
+        <input type="submit" name="login-btn" value="Login" (click)="onLogin()">
+        <a href="#">Forgot your password?</a>
+    </form>        
+  </div>
+  </body>
+  </html>
+
