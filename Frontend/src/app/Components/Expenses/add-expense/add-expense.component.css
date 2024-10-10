@@ -1,0 +1,157 @@
+/* add-expense.component.css */
+:host {
+    display: block;
+    font-family: Arial, sans-serif;
+    width: 100%;
+    max-width: 500px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08);
+  }
+  
+  .expense-form-container {
+    width: 100%;
+  }
+  
+  h2 {
+    color: #333;
+    margin-bottom: 20px;
+    text-align: center;
+  }
+  
+  .expense-form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
+  
+  .form-group {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  label {
+    margin-bottom: 5px;
+    color: #555;
+    font-weight: bold;
+  }
+  
+  .form-control {
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 16px;
+    transition: border-color 0.3s ease;
+  }
+  
+  .form-control:focus {
+    outline: none;
+    border-color: #007bff;
+    box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25);
+  }
+
+  .selected-friend {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.5rem; /* Adjust the spacing as needed */
+    padding: 0.5rem;       /* Optional: Add padding for a better look */
+    border: 1px solid #ccc; /* Optional: Add a border */
+    border-radius: 4px;    /* Optional: Rounded corners */
+  }
+  
+  select.form-control {
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='%23555' viewBox='0 0 16 16'%3E%3Cpath d='M8 11.5l-5-5h10l-5 5z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 10px center;
+    padding-right: 30px;
+  }
+  
+  .button-group {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+  }
+
+  .submit-button, .cancel-button {
+    padding: 12px 20px;
+    border-radius: 4px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  /* .submit-button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+  }
+  
+  .submit-button:hover {
+    background-color: #0056b3;
+  } */
+  
+  .submit-button:disabled {
+    /* background-color: #cccccc; */
+    cursor: not-allowed;
+  }
+  
+  @media (max-width: 600px) {
+    :host {
+      padding: 15px;
+    }
+    
+    .form-control {
+      font-size: 14px;
+    }
+    
+    .submit-button, .cancel-button {
+      padding: 10px 15px;
+      font-size: 14px;
+    }
+  }
+
+  .selected-friends-container {
+    display: flex;
+    flex-wrap: wrap; /* Allow items to wrap */
+    gap: 5px; /* Space between items; adjust this for uniform spacing */
+  }
+  
+  .selected-friend {
+    flex: 0 1 auto; /* Allow the item to shrink but not grow */
+    max-width: 500px; /* Set a maximum width for the item */
+    min-width: 100px; /* Optional: set a minimum width */
+    padding: 0.5rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    display: flex;
+    justify-content: space-between; /* Space between name and button */
+    align-items: center;
+    overflow: hidden; /* Hide overflow content */
+    text-overflow: ellipsis; /* Add ellipsis for overflow text */
+    white-space: nowrap; /* Prevent text from wrapping */
+    margin-bottom: 2px; /* Reduced vertical spacing */
+  }
+  
+  
+  .selected-friend .remove-button {
+    margin-left: 10px; /* Add space between the name and button */
+  }
+
+  .modal-header,.modal-footer{
+    background-color: rgb(245, 243, 243);
+  }
+  
+  .modal-footer {
+    display: flex;
+    justify-content: space-between; /* Ensures space between items */
+    padding: 10px; /* Optional: adjust padding */
+  }
+  
+  .cancel-button {
+    margin-right: auto; /* Pushes the cancel button to the left */
+  }
+  

@@ -8,6 +8,7 @@ import { FriendPageComponent } from './Components/Friends/friend-page/friend-pag
 import { AllTransactionsComponent } from './Components/History/all-transactions/all-transactions.component';
 import { LoginComponent } from './PrimeComponents/login/login.component';
 import { authGuard } from './Guards/auth.guard';
+import { AddExpenseComponent } from './Components/Expenses/add-expense/add-expense.component';
 
 export const routes: Routes = [
     {
@@ -40,7 +41,7 @@ export const routes: Routes = [
                 component:AllTransactionsComponent
             }
         ],
-        canActivate:[authGuard]
+        // canActivate:[authGuard]
     },
     {
         path:'login',
@@ -51,5 +52,11 @@ export const routes: Routes = [
         path:'',
         redirectTo:'login',
         pathMatch:'full'
+    }
+    ,
+    {
+        path:'expense',
+        //redirectTo:'login',
+        component:AddExpenseComponent
     }
 ];

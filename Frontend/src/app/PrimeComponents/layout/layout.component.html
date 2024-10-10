@@ -1,31 +1,38 @@
 <nav class="navbar navbar-expand-lg bg-body-tertiary top-fixed">
-    <div class="container-fluid">
-      <a class="navbar-brand" routerLink="home">बटवारा</a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-          <li class="nav-item">
-            <a class="nav-link active" aria-current="page" routerLink="home">Home</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link active" aria-current="page" routerLink="group">Groups</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link active" aria-current="page" routerLink="friends">Friends</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link active" aria-current="page" routerLink="history">History</a>
-          </li>
-        </ul>
-        <div class="d-flex" >
-         
-          <button class="btn btn-outline-success" type="submit">Add Expense</button>
-
-            <button class="btn btn-outline-danger" type="submit" (click)="onLogout()">LogOut</button>
-        </div>
+  <div class="container-fluid">
+    <a class="navbar-brand" routerLink="home">बटवारा</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" routerLink="home">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" routerLink="group">Groups</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" routerLink="friends">Friends</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" routerLink="history">History</a>
+        </li>
+      </ul>
+      <div class="d-flex">
+        <!-- Button trigger modal -->
+        <button (click)="openModal()" type="button" class="btn btn-outline-success" data-toggle="modal">
+          Add Expense
+        </button>
+        <button class="btn btn-outline-danger" type="submit" (click)="onLogout()">
+          LogOut
+        </button>
       </div>
     </div>
-  </nav>
-  <router-outlet/>
+  </div>
+</nav>
+
+<app-add-expense (closeDialog)="cancel()" (expenseAdded)="saveChanges()" />
+
+<router-outlet />
