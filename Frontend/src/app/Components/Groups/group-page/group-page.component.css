@@ -129,7 +129,9 @@ body {
   border: none; /* No border */
   cursor: pointer; /* Pointer cursor on hover */
 }
-
+.add-button:hover{
+  color:black;
+}
 .add-button svg {
   fill: #faf9f9; /* Set icon color */
 }
@@ -174,6 +176,7 @@ body {
   margin-left: 10px; /* Space between name and button */
   padding: 0; /* Remove padding */
   align-items: center;
+  margin-top: 2px;
 }
 
 .removed-button svg {
@@ -191,4 +194,67 @@ body {
 }
 .buttons{
   align-items:self-end;
+}
+
+
+.pointer {
+  cursor: pointer; /* Change cursor to pointer */
+}
+
+/* Optional: Add hover effect for better UX */
+.pointer:hover {
+  text-decoration: underline; /* Underline on hover */
+}
+.div{
+  display: flex;
+}
+.name-span{
+  font-size: large;
+}
+
+.search-container {
+  margin: 0 auto 20px; /* Center horizontally and space below */
+  background-color: #f0f8ff; /* Light blue background */
+  padding: 15px; /* Padding around the input */
+  border-radius: 8px; /* Rounded corners */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+  width: 80%; /* Set width to a percentage of the parent container */
+  max-width: 900px; /* Optional: set a max-width for larger screens */
+  display: flex;
+  height: 70px;
+}
+
+#search-input {
+  width: 100%; /* Full width of the container */
+  padding: 10px; /* Padding inside the input */
+  border: 1px solid #ccc; /* Border for the input */
+  border-radius: 5px; /* Rounded corners for the input */
+  background-color: #ffffff; /* White background for the input */
+  color: #333; /* Dark text color */
+  font-size: 16px; /* Increase font size */
+  transition: border-color 0.3s ease; /* Smooth transition for border color */
+  margin-right: 10px;
+}
+
+/* Change border color on focus */
+#search-input:focus {
+  border-color: #007bff; /* Change border color on focus */
+  outline: none; /* Remove default outline */
+}
+.search{
+  margin: 0;
+}
+.fixed{
+  position: fixed;
+height: fit-content;
+
+}
+.sign{
+  font-size: x-large;
+  font-weight: bolder;
+}
+
+.list-user:hover,.sign:hover{
+  color: green;
+  transition: fill 0.3s; 
 }

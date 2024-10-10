@@ -113,3 +113,24 @@ body{
 .back-link:hover {
     color: #0056b3; /* Optional: Darker color on hover */
 }
+.circular-button {
+    position: fixed; /* Fixed positioning */
+    bottom: 30px; /* Distance from the bottom */
+    right: 30px; /* Distance from the right */
+    width: 70px; /* Width of the button */
+    height: 70px; /* Height of the button */
+    background-color: #28a745; /* Green background color */
+    color: white; /* White text color */
+    border: none; /* No border */
+    border-radius: 50%; /* Circular shape */
+    font-size: 30px; /* Font size for the plus sign */
+    display: flex; /* Flexbox for centering content */
+    align-items: center; /* Center vertically */
+    justify-content: center; /* Center horizontally */
+    cursor: pointer; /* Pointer cursor on hover */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Shadow effect */
+}
+
+.circular-button:hover {
+    background-color: #218838; /* Darker green on hover */
+}
