@@ -129,7 +129,9 @@ body {
   border: none; /* No border */
   cursor: pointer; /* Pointer cursor on hover */
 }
-
+.add-button:hover{
+  color:black;
+}
 .add-button svg {
   fill: #faf9f9; /* Set icon color */
 }
@@ -174,6 +176,7 @@ body {
   margin-left: 10px; /* Space between name and button */
   padding: 0; /* Remove padding */
   align-items: center;
+  margin-top: 2px;
 }
 
 .removed-button svg {
@@ -191,4 +194,135 @@ body {
 }
 .buttons{
   align-items:self-end;
+}
+
+
+.pointer {
+  cursor: pointer; /* Change cursor to pointer */
+}
+
+/* Optional: Add hover effect for better UX */
+.pointer:hover {
+  text-decoration: underline; /* Underline on hover */
+}
+.div{
+  display: flex;
+}
+.name-span{
+  font-size: large;
+}
+
+.search-container {
+  margin: 0 auto 20px; /* Center horizontally and space below */
+  background-color: #f0f8ff; /* Light blue background */
+  padding: 15px; /* Padding around the input */
+  border-radius: 8px; /* Rounded corners */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+  width: 80%; /* Set width to a percentage of the parent container */
+  max-width: 900px; /* Optional: set a max-width for larger screens */
+  display: flex;
+  height: 70px;
+}
+
+#search-input {
+  width: 100%; /* Full width of the container */
+  padding: 10px; /* Padding inside the input */
+  border: 1px solid #ccc; /* Border for the input */
+  border-radius: 5px; /* Rounded corners for the input */
+  background-color: #ffffff; /* White background for the input */
+  color: #333; /* Dark text color */
+  font-size: 16px; /* Increase font size */
+  transition: border-color 0.3s ease; /* Smooth transition for border color */
+  margin-right: 10px;
+}
+
+/* Change border color on focus */
+#search-input:focus {
+  border-color: #007bff; /* Change border color on focus */
+  outline: none; /* Remove default outline */
+}
+.search{
+  margin: 0;
+}
+.fixed{
+  position: fixed;
+height: fit-content;
+
+}
+.sign{
+  font-size: x-large;
+  font-weight: bolder;
+}
+
+.list-user:hover,.sign:hover{
+  color: green;
+  transition: fill 0.3s; 
+}
+.event-item {
+  padding: 10px; /* Adjust padding for list items */
+  background-color: #ffffff; /* White background for event items */
+  border-radius: 8px; /* Rounded corners for event items */
+  margin-bottom: 10px; /* Space between items */
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+  transition: transform 0.2s; /* Smooth scaling on hover */
+}
+
+.event-item:hover {
+  transform: scale(1.02); /* Slightly enlarge on hover */
+}
+
+.event-info {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  align-items: center;
+}
+
+.event-description {
+  font-weight: bold;
+  flex: 1; /* Allow description to take available space */
+}
+
+.event-amount, .event-time {
+  color: #555; /* Subtle color for secondary information */
+  margin-left: 10px; /* Space between elements */
+}
+
+/* Make the card body scrollable but keep the scrollbar visible */
+.data-container-event {
+  overflow-y: auto; /* Enable vertical scrolling */
+  scrollbar-width: thin; /* Thin scrollbar for Firefox */
+}
+
+.data-container::-webkit-scrollbar {
+  width: 8px; /* Width of the scrollbar */
+}
+
+.data-container::-webkit-scrollbar-thumb {
+  background-color: #007bff; /* Color of the scrollbar */
+  border-radius: 10px; /* Rounded scrollbar */
+}
+
+.profile-icon {
+  width: 30px; /* Set the desired width */
+  height: 30px; /* Set the desired height */
+  border-radius: 50%; /* Make it circular */
+  overflow: hidden; /* Hide overflow */
+  display: flex; /* Center the image */
+  justify-content: center; /* Center horizontally */
+  align-items: center; /* Center vertically */
+  margin: 5px;
+  border: 2px solid rgb(1, 92, 153);
+
+}
+
+.profile-icon img {
+  width: 100%; /* Make image fill the container */
+  height: auto; /* Maintain aspect ratio */
+  /* padding: 5px; */
+ 
+}
+.icon-container {
+  display: flex; /* Use flexbox to arrange items in a row */
+  flex-wrap: wrap; /* Allow items to wrap to the next line when necessary */
 }

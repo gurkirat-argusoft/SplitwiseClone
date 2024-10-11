@@ -1,10 +1,10 @@
 export class Event {
   eventId: number;
   description: string;
-  happenedAt: string; // Use ISO string format
+  happenedAt: string; // Use string to match LocalDateTime format
   amount: number;
   splitType: string;
-  groupId?: string; // Optional field
+  groupId?: string; // Optional if it can be null
 
   constructor(
     eventId: number,

@@ -12,19 +12,20 @@
     <div class="container mt-5">
         <div class="card-header text-white card shadow-sm heading">
             <div class="header-content">
-                <h5 class="mb-0">{{currentGroup.groupName}}</h5>
+                <h5 class="mb-0">{{currentGroup?.groupName}}</h5>
                 <div class="icon-buttons">
                     <!-- Edit Icon -->
-                    <button class="icon-button" title="Edit">
+                    <button class="icon-button" title="Edit" data-bs-toggle="modal" data-bs-target="#updateModal"
+                        (click)="onUpdateGroup()">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20" fill="#fff">
                             <path
                                 d="M3 17.25V21h3.75l11.39-11.39-3.75-3.75L3 17.25zM20.71 7.04a1 1 0 0 0 0-1.41l-2.34-2.34a1 1 0 0 0-1.41 0l-1.42 1.42 3.75 3.75 1.42-1.42z" />
                         </svg>
                     </button>
                     <!-- Delete Icon -->
-                    <button class="removed-button" title="Remove" >
+                    <button class="removed-button" title="Remove" (click)="deleteGroup(currentGroup.groupId)">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20" fill="red">
-                            <path d="M3 6h18v2H3zm0 4h18v12a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V10zm2 2v10h12V12H5z"/>
+                            <path d="M3 6h18v2H3zm0 4h18v12a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V10zm2 2v10h12V12H5z" />
                         </svg>
                     </button>
                 </div>
@@ -50,7 +51,8 @@
                                             class="card-img-top" alt="Group Image"
                                             (error)="group.imageUrl = 'https://images.pexels.com/photos/853168/pexels-photo-853168.jpeg?auto=compress&cs=tinysrgb&w=600'" />
                                     </div>
-                                    <span class="name-span">{{group.groupName}}</span>
+                                    <span class="name-span pointer">{{ group.groupName | slice:0:13 }}{{
+                                        group.groupName.length > 13 ? '...' : '' }}</span>
                                 </div>
                             </li>
                             <!-- More list items... -->
@@ -60,38 +62,33 @@
                 </div>
             </div>
 
-            <!-- Friends Who Owe Me Money Card -->
+          
+            <!-- Group Events Card -->
             <div class="col-md-4 mb-4 center-col">
                 <div class="card shadow-sm">
                     <div class="card-header center-header text-white">
                         <h5 class="mb-0">Group Events</h5>
                     </div>
-                    <div class="card-body data-container">
+                    <div class="card-body data-container-event">
                         <ul class="list-group list-group-flush">
-                            <!-- Sample Data -->
-                            <li class="list-group-item">Friend A - $50</li>
-                            <!-- More list items... -->
-                            <li class="list-group-item">Friend A - $50</li>
-                            <li class="list-group-item">Friend A - $50</li>
-                            <li class="list-group-item">Friend A - $50</li>
-                            <li class="list-group-item">Friend A - $50</li>
-                            <li class="list-group-item">Friend A - $50</li>
-                            <li class="list-group-item">Friend A - $50</li>
-                            <li class="list-group-item">Friend A - $50</li>
-                            <li class="list-group-item">Friend A - $50</li>
-                            <li class="list-group-item">Friend A - $50</li>
-                            <li class="list-group-item">Friend A - $50</li>
-                            <li class="list-group-item">Friend A - $50</li>
-                            <li class="list-group-item">Friend A - $50</li>
-                            <li class="list-group-item">Friend A - $50</li>
-                            <li class="list-group-item">Friend A - $50</li>
-                            <li class="list-group-item">Friend A - $50</li>
-                            <li class="list-group-item">Friend A - $50</li>
-
+                            @if (isEvents) {
+                            @for (event of groupEvents; track $index) {
+                            <li>
+                                <div
+                                    class="event-info list-group-item d-flex justify-content-between align-items-center event-item">
+                                    <span class="event-description">{{ event.description }}</span>
+                                    <span class="event-amount">Amount: {{ event.amount }}</span>
+                                    <span class="event-time">Time: {{ event.happenedAt| date: 'short' }}</span>
+                                </div>
+                                }
+                                } @else {
+                                <span>No event belongs to this group.</span>
+                                }
                         </ul>
                     </div>
                 </div>
             </div>
+
 
             <!-- Third Column Card -->
             <div class="col-md-4 mb-4 right-col">
@@ -99,7 +96,8 @@
                     <div class="card-header right-header text-white">
                         <h5 class="mb-0">Members</h5>
                         <div class="add-button">
-                            <button class="add-button" title="Add">
+                            <button class="add-button" title="Add" (click)="addMember()" data-bs-toggle="modal"
+                                data-bs-target="#addMemberModal">
                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16"
                                     fill="#fff"> <!-- Reduced size -->
                                     <path d="M12 2v20M2 12h20" stroke="#fff" stroke-width="3" stroke-linecap="round" />
@@ -114,16 +112,21 @@
                             @for (friend of groupMembers; track $index) {
                             <li>
                                 <div class="icon1-container">
-                                    <div class="profile-icon">
-                                        <img [src]="friend.imageUrl ? friend.imageUrl:'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSmpoQaaw13BKAmYv1iRPzkz9AkM0ZskCqK_g&s'"
-                                            alt="User"
-                                            (error)="friend.imageUrl = 'https://images.pexels.com/photos/853168/pexels-photo-853168.jpeg?auto=compress&cs=tinysrgb&w=600'" />
+                                    <div class="div">
+                                        <div class="profile-icon">
+                                            <img [src]="friend.imageUrl ? friend.imageUrl:'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSmpoQaaw13BKAmYv1iRPzkz9AkM0ZskCqK_g&s'"
+                                                alt="User"
+                                                (error)="friend.imageUrl = 'https://images.pexels.com/photos/853168/pexels-photo-853168.jpeg?auto=compress&cs=tinysrgb&w=600'" />
 
+                                        </div>
+                                        <span class="name-span">{{ friend.userName | slice:0:10}}{{
+                                            friend.userName.length > 10 ? '...' : '' }}</span>
                                     </div>
-                                    <span class="name-span">{{friend.userName}}</span>
-                                    <button class="remove-button" title="Remove" >
-                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20" fill="red">
-                                            <path d="M3 6h18v2H3zm0 4h18v12a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V10zm2 2v10h12V12H5z"/>
+                                    <button class="remove-button" title="Remove" (click)="deleteMember(friend.userId)">
+                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20"
+                                            height="20" fill="red">
+                                            <path
+                                                d="M3 6h18v2H3zm0 4h18v12a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V10zm2 2v10h12V12H5z" />
                                         </svg>
                                     </button>
                                 </div>
@@ -138,8 +141,88 @@
         </div> <!-- End of row -->
     </div> <!-- End of container -->
 
-    <!-- Link to your JavaScript if needed -->
-    <!-- <script src="script.js"></script> -->
+    <!-- Modal -->
+    <div class="modal" #updateModal id="updateModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Update Group</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
+                        (click)="resetForm()"></button>
+                </div>
+                <div class="modal-body">
+
+                    <form [formGroup]="groupForm" (ngSubmit)="onSubmit()" class="shadow p-4 rounded bg-light">
+                        <div class="form-group">
+                            <label for="groupName">Group Name:</label>
+                            <input id="groupName" formControlName="groupName" class="form-control"
+                                placeholder="Enter group name" />
+
+                        </div>
+
+                        <div class="form-group">
+                            <label for="imageUrl">Image URL:</label>
+                            <input id="imageUrl" formControlName="imageUrl" class="form-control"
+                                placeholder="Enter image URL" />
+
+                        </div>
+
+
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"
+                                (click)="resetForm()">Close</button>
+                            <button type="submit" [disabled]="groupForm.invalid" class="btn btn-primary"
+                                data-bs-dismiss="modal">Save changes</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- addMember modal -->
+    <div class="modal fade fixed" id="addMemberModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Add Member</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="search-container">
+                        <input type="text" id="search-input" placeholder="Search groups by name...">
+                        <button class="btn btn-outline-success search" type="button">Search</button>
+                    </div>
+                    <div class="card-body data-container">
+                        <ul class="list-group list-group-flush">
+                            <!-- Sample Data for Group Transactions -->
+                            @for (user of users; track $index) {
+                            <li class="list-user">
+                                <div class="icon1-container">
+                                    <div class="div">
+                                        <div class="profile-icon">
+                                            <img [src]="user.imageUrl ? user.imageUrl:'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSmpoQaaw13BKAmYv1iRPzkz9AkM0ZskCqK_g&s'"
+                                                alt="User"
+                                                (error)="user.imageUrl = 'https://images.pexels.com/photos/853168/pexels-photo-853168.jpeg?auto=compress&cs=tinysrgb&w=600'" />
+
+                                        </div>
+                                        <span class="name-span">{{ user.userName }}
+                                        </span>
+                                    </div>
+                                    <button class="add-button sign" data-bs-dismiss="modal"
+                                        (click)="addMemberToGroup(user.userName)">+</button>
+                                </div>
+                            </li>
+                            <!-- More list items... -->
+                            }
+                        </ul>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
 </body>
 
 </html>
