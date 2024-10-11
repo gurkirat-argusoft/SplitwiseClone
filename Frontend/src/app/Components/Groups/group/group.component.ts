@@ -4,38 +4,35 @@ import { Group } from '../../../Entites/group';
 import { GroupService } from '../../../Services/group.service';
 import { CommonModule } from '@angular/common';
 import { User } from '../../../Entites/user';
-import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { UserService } from '../../../Services/user.service';
 
 @Component({
   selector: 'app-group',
   standalone: true,
-  imports: [RouterLink, RouterModule, RouterOutlet, CommonModule,FormsModule,ReactiveFormsModule],
+  imports: [RouterLink, RouterModule, RouterOutlet, CommonModule, FormsModule, ReactiveFormsModule],
   templateUrl: './group.component.html',
   styleUrl: './group.component.css'
 })
 export class GroupComponent {
-  groupForm: FormGroup=new FormGroup({
-    groupName:new FormControl(""),
-    imageUrl:new FormControl("")
-  }); 
+  groupForm: FormGroup = new FormGroup({
+    groupName: new FormControl("",[Validators.required]),
+    imageUrl: new FormControl("")
+  });
   groups: Set<Group> = new Set();
   filteredGroups: Set<Group> = new Set();
   userId: any = localStorage.getItem('loginUser');
   searchInput: string = '';
-  noResultsFound: boolean = false; // New property to track search results
-users:Set<User>=new Set<User>();
-user!:User;
-  constructor(private groupService: GroupService,private userService:UserService) {}
+  noResultsFound: boolean = false; 
+  users: Set<User> = new Set<User>();
+  user!: User;
+  constructor(private groupService: GroupService, private userService: UserService) { }
 
   ngOnInit(): void {
     this.loadUserGroups(Number(localStorage.getItem('loginUser')));
-
   }
 
   loadUserGroups(userId: number): void {
-
-
     this.groupService.getUserGroups(userId).subscribe(
       (data: Set<Group>) => {
         this.groups = data;
@@ -43,7 +40,6 @@ user!:User;
         this.noResultsFound = false; // Reset on load
         data.forEach(group => {
           this.loadUsersInGroup(group.groupId);
-          
         });
       },
       (error: any) => {
@@ -79,45 +75,43 @@ user!:User;
       this.noResultsFound = false; // Reset if input is empty
     }
   }
-  reload(){
-    this.noResultsFound=false;
-    this.searchInput='';
+
+  reload() {
+    this.noResultsFound = false;
+    this.searchInput = '';
     this.loadUserGroups(Number(localStorage.getItem('loginUser')));
   }
- 
+
   getFirstFourUsers(users?: Set<User>): User[] {
     return Array.from(users || []).slice(0, 4);
   }
 
-
-  openGroupModal(){
-    this.userService.getUserById(Number(localStorage.getItem('loginUser'))).subscribe((data:User)=>{
-          
-      this.user=data;
+  openGroupModal() {
+    this.userService.getUserById(Number(localStorage.getItem('loginUser'))).subscribe((data: User) => {
+      this.user = data;
       console.log(this.user.userName);
     });
   }
 
-onSubmit() {
-  this.groupService.createGroup(this.groupForm.value).subscribe((data)=>{
-    console.log(data.groupId); 
-    debugger
-    this.groupService.addMember(data.groupId, this.user.userName).subscribe(
-      (response) => {
-        console.log('Member added successfully:', response);
-        // Optionally reload groups or perform other actions
-        this.loadUserGroups(Number(localStorage.getItem('loginUser')));
-      },
-      (error) => {
-        console.error('Error adding member:', error);
-      }
-    );
-  })
-  this.loadUserGroups(Number(localStorage.getItem('loginUser')));
-}
+  onSubmit() {
+    this.groupService.createGroup(this.groupForm.value).subscribe((data) => {
+      console.log(data.groupId);
+      this.groupService.addMember(data.groupId, this.user.userName).subscribe(
+        (response) => {
+          this.loadUserGroups(Number(localStorage.getItem('loginUser')));
+          this.groupForm.reset();
+        },
+        (error) => {
+          console.error('Error adding member:', error);
+        }
+      );
+    })
+  }
 
-resetForm() {
-}
+  resetForm() {
+    this.groupForm.reset(); // Reset the form to its initial state
+
+  }
 
 
 }

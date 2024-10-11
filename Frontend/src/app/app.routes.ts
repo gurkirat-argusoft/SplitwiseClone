@@ -8,6 +8,7 @@ import { FriendPageComponent } from './Components/Friends/friend-page/friend-pag
 import { AllTransactionsComponent } from './Components/History/all-transactions/all-transactions.component';
 import { LoginComponent } from './PrimeComponents/login/login.component';
 import { authGuard } from './Guards/auth.guard';
+import { EventComponent } from './Components/event/event.component';
 
 export const routes: Routes = [
     {
@@ -28,16 +29,20 @@ export const routes: Routes = [
                 component:GroupPageComponent
             },
             {
-                path:'friends',
+                path:'friend',
                 component:FriendListComponent
             },
             {
-                path:'friends/friendPage',
+                path:'friend/friendPage',
                 component:FriendPageComponent
             },
             {
                 path:'history',
                 component:AllTransactionsComponent
+            },
+            {
+                path:'event',
+                component:EventComponent
             }
         ],
         canActivate:[authGuard]

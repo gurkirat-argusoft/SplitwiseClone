@@ -62,38 +62,33 @@
                 </div>
             </div>
 
-            <!-- Friends Who Owe Me Money Card -->
+          
+            <!-- Group Events Card -->
             <div class="col-md-4 mb-4 center-col">
                 <div class="card shadow-sm">
                     <div class="card-header center-header text-white">
                         <h5 class="mb-0">Group Events</h5>
                     </div>
-                    <div class="card-body data-container">
+                    <div class="card-body data-container-event">
                         <ul class="list-group list-group-flush">
-                            <!-- Sample Data -->
-                            <li class="list-group-item">Friend A - $50</li>
-                            <!-- More list items... -->
-                            <li class="list-group-item">Friend A - $50</li>
-                            <li class="list-group-item">Friend A - $50</li>
-                            <li class="list-group-item">Friend A - $50</li>
-                            <li class="list-group-item">Friend A - $50</li>
-                            <li class="list-group-item">Friend A - $50</li>
-                            <li class="list-group-item">Friend A - $50</li>
-                            <li class="list-group-item">Friend A - $50</li>
-                            <li class="list-group-item">Friend A - $50</li>
-                            <li class="list-group-item">Friend A - $50</li>
-                            <li class="list-group-item">Friend A - $50</li>
-                            <li class="list-group-item">Friend A - $50</li>
-                            <li class="list-group-item">Friend A - $50</li>
-                            <li class="list-group-item">Friend A - $50</li>
-                            <li class="list-group-item">Friend A - $50</li>
-                            <li class="list-group-item">Friend A - $50</li>
-                            <li class="list-group-item">Friend A - $50</li>
-
+                            @if (isEvents) {
+                            @for (event of groupEvents; track $index) {
+                            <li>
+                                <div
+                                    class="event-info list-group-item d-flex justify-content-between align-items-center event-item">
+                                    <span class="event-description">{{ event.description }}</span>
+                                    <span class="event-amount">Amount: {{ event.amount }}</span>
+                                    <span class="event-time">Time: {{ event.happenedAt| date: 'short' }}</span>
+                                </div>
+                                }
+                                } @else {
+                                <span>No event belongs to this group.</span>
+                                }
                         </ul>
                     </div>
                 </div>
             </div>
+
 
             <!-- Third Column Card -->
             <div class="col-md-4 mb-4 right-col">
@@ -101,7 +96,8 @@
                     <div class="card-header right-header text-white">
                         <h5 class="mb-0">Members</h5>
                         <div class="add-button">
-                            <button class="add-button" title="Add" (click)="addMember()" data-bs-toggle="modal" data-bs-target="#addMemberModal">
+                            <button class="add-button" title="Add" (click)="addMember()" data-bs-toggle="modal"
+                                data-bs-target="#addMemberModal">
                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16"
                                     fill="#fff"> <!-- Reduced size -->
                                     <path d="M12 2v20M2 12h20" stroke="#fff" stroke-width="3" stroke-linecap="round" />
@@ -176,54 +172,57 @@
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"
                                 (click)="resetForm()">Close</button>
-                            <button type="submit" class="btn btn-primary" data-bs-dismiss="modal">Save changes</button>
+                            <button type="submit" [disabled]="groupForm.invalid" class="btn btn-primary"
+                                data-bs-dismiss="modal">Save changes</button>
                         </div>
                     </form>
                 </div>
             </div>
         </div>
     </div>
-<!-- addMember modal -->
-    <div class="modal fade fixed" id="addMemberModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <!-- addMember modal -->
+    <div class="modal fade fixed" id="addMemberModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
         <div class="modal-dialog">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h1 class="modal-title fs-5" id="exampleModalLabel">Add Member</h1>
-              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <div class="search-container">
-                    <input type="text" id="search-input" placeholder="Search groups by name..." >
-                    <button class="btn btn-outline-success search" type="button" >Search</button>
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Add Member</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <div class="card-body data-container">
-                    <ul class="list-group list-group-flush">
-                        <!-- Sample Data for Group Transactions -->
-                        @for (user of users; track $index) {
-                        <li class="list-user">
-                            <div class="icon1-container">
-                                <div class="div">
-                                    <div class="profile-icon">
-                                        <img [src]="user.imageUrl ? user.imageUrl:'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSmpoQaaw13BKAmYv1iRPzkz9AkM0ZskCqK_g&s'"
-                                            alt="User"
-                                            (error)="user.imageUrl = 'https://images.pexels.com/photos/853168/pexels-photo-853168.jpeg?auto=compress&cs=tinysrgb&w=600'" />
+                <div class="modal-body">
+                    <div class="search-container">
+                        <input type="text" id="search-input" placeholder="Search groups by name...">
+                        <button class="btn btn-outline-success search" type="button">Search</button>
+                    </div>
+                    <div class="card-body data-container">
+                        <ul class="list-group list-group-flush">
+                            <!-- Sample Data for Group Transactions -->
+                            @for (user of users; track $index) {
+                            <li class="list-user">
+                                <div class="icon1-container">
+                                    <div class="div">
+                                        <div class="profile-icon">
+                                            <img [src]="user.imageUrl ? user.imageUrl:'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSmpoQaaw13BKAmYv1iRPzkz9AkM0ZskCqK_g&s'"
+                                                alt="User"
+                                                (error)="user.imageUrl = 'https://images.pexels.com/photos/853168/pexels-photo-853168.jpeg?auto=compress&cs=tinysrgb&w=600'" />
 
-                                    </div>
-                                    <span class="name-span">{{ user.userName }}
+                                        </div>
+                                        <span class="name-span">{{ user.userName }}
                                         </span>
+                                    </div>
+                                    <button class="add-button sign" data-bs-dismiss="modal"
+                                        (click)="addMemberToGroup(user.userName)">+</button>
                                 </div>
-                               <button class="add-button sign" data-bs-dismiss="modal" (click)="addMemberToGroup(user.userName)">+</button>
-                            </div>
-                        </li>
-                        <!-- More list items... -->
-                        }
-                    </ul>
+                            </li>
+                            <!-- More list items... -->
+                            }
+                        </ul>
+                    </div>
                 </div>
+
             </div>
-           
-          </div>
         </div>
-      </div>
+    </div>
 </body>
 
 </html>
