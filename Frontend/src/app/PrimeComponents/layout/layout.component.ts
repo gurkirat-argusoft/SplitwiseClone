@@ -13,7 +13,7 @@ import { AddExpenseComponent } from '../../Components/Expenses/add-expense/add-e
 })
 export class LayoutComponent {
   route = inject(Router);
-
+  expenseType='';
   @ViewChild(AddExpenseComponent) model!: AddExpenseComponent;
 
   openModal() {
@@ -24,7 +24,7 @@ export class LayoutComponent {
     localStorage.removeItem('loginUser');
     this.route.navigateByUrl('login');
   }
-
+ 
   saveChanges() {
     // Implement your save logic here
     console.log('Changes saved!');
@@ -35,5 +35,9 @@ export class LayoutComponent {
     // Logic for canceling can go here
     console.log('Changes canceled!');
     $('#addExpenseModel').modal('hide'); // Optionally close the modal
+  }
+
+  updateExpenseType(expenseType:string){
+    this.expenseType = expenseType;
   }
 }

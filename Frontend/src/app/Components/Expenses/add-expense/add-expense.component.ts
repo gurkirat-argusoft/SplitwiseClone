@@ -1,5 +1,5 @@
 // add-expense.component.ts
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { EventService } from '../../../Services/event.service';
@@ -16,7 +16,8 @@ export class AddExpenseComponent implements OnInit {
   @Output() closeDialog = new EventEmitter<void>();
   @Output() expenseAdded = new EventEmitter<any>();
 
-  expenseType:string="group";
+  @Input() expenseType:string="";
+
   event!:Event;
   expenseForm!: FormGroup;
   groups: string[] = [
