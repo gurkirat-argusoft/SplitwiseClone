@@ -15,6 +15,10 @@ export class EventService {
     return this.http.get<Event[]>(`${this.baseUrl}/geteventsbyuser/${userId}`);
   }
 
+  getEventsByGroup(groupId: number): Observable<Event[]> {
+    return this.http.get<Event[]>(`${this.baseUrl}/geteventsbygroup/${groupId}`);
+  }
+
   addEvent(event: Event): Observable<Event> {
     return this.http.post<Event>(`${this.baseUrl}/addevent`, event);
   }
