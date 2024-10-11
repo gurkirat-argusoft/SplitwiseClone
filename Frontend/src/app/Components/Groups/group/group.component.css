@@ -134,3 +134,8 @@ body{
 .circular-button:hover {
     background-color: #218838; /* Darker green on hover */
 }
+.card-img, .card-img-top {
+    border-top-left-radius: var(--bs-card-inner-border-radius);
+    border-top-right-radius: var(--bs-card-inner-border-radius);
+    height: 140px;
+}

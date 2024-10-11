@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { User } from '../../../Entites/user';
 import { FriendService } from '../../../Services/friend.service';
+import { UserService } from '../../../Services/user.service';
 
 @Component({
   selector: 'app-friend-list',
@@ -13,17 +14,18 @@ import { FriendService } from '../../../Services/friend.service';
 export class FriendListComponent {
   friends: Set<User> = new Set(); // Use Set to manage unique friends
   userId :any=localStorage.getItem('loginUser');
-  constructor(private friendService: FriendService) {}
+  users:Set<User>=new Set();
+  constructor(private friendService: FriendService,private userService:UserService) {}
 
   ngOnInit(): void {
      // Replace with actual user ID
-    this.getAllFriends(this.userId);
+    this.getAllFriends();
     console.log(this.userId);
-    
+    this.getAllUsers();
   }
 
-  getAllFriends(userId: number): void {
-    this.friendService.getAllFriends(userId).subscribe(
+  getAllFriends(): void {
+    this.friendService.getAllFriends(this.userId).subscribe(
       (data) => {
         this.friends = new Set(data); // Convert array to Set
       },
@@ -34,11 +36,12 @@ export class FriendListComponent {
   }
 
   addFriend(friendId: number): void {
-    const userId = 1; // Replace with actual user ID
-    this.friendService.addFriend(userId, friendId).subscribe(
+   // Replace with actual user ID
+    this.friendService.addFriend(this.userId, friendId).subscribe(
       (data) => {
         this.friends.add(data); // Add friend to Set
         console.log('Friend added:', data);
+        this.getAllFriends()
       },
       (error) => {
         console.error('Error adding friend:', error);
@@ -61,5 +64,10 @@ export class FriendListComponent {
         console.error('Error deleting friend:', error);
       }
     );
+  }
+  getAllUsers(){
+    this.userService.getAllUsers().subscribe((data)=>{
+      this.users=data;
+    })
   }
 }

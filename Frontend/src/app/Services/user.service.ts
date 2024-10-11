@@ -1,12 +1,13 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { User } from '../Entites/user';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { Constants } from '../Components/Constants/Constants';
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
+  public user$:BehaviorSubject<Set<User>>=new BehaviorSubject<Set<User>>(new Set());
   private apiUrl = Constants.USER_API ; // Update with your API URL
 
   constructor(private http: HttpClient) {}

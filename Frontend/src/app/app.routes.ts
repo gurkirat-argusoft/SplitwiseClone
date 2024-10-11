@@ -33,7 +33,7 @@ export const routes: Routes = [
                 component:FriendListComponent
             },
             {
-                path:'friend/friendPage',
+                path:'friend/friendPage/:id',
                 component:FriendPageComponent
             },
             {

@@ -1,23 +1,85 @@
-<div class="container">
-    <div class="search-container">
-        <input type="text" id="search-input" placeholder="Search friends by name...">
-        <button class="btn btn-outline-success" type="submit">Search</button>
-    </div>
-    
-    <div class="scrollable-container"> <!-- New scrollable container -->
-        <div class="line">
-            <!-- Friend cards go here -->
-             @for (friend of friends; track $index) {
-            <div class="card" routerLink="friendPage">
-                <img src="{{friend.imageUrl}}"
-                    class="card-img-top" alt="this is group image">
-                <div class="card-body">
-                    <h5 class="card-title">{{friend.userName}}</h5>
-                </div>
-               
-            </div>}
-            <!-- Repeat for other cards -->
-            
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div class="container">
+        <div class="search-container">
+            <input type="text" id="search-input" placeholder="Search friends by name...">
+            <button class="btn btn-outline-success" type="submit">Search</button>
+        </div>
+        
+        <div class="scrollable-container"> <!-- New scrollable container -->
+            <div class="line">
+                <!-- Friend cards go here -->
+                 @for (friend of friends; track $index) {
+                <div class="card" routerLink="friendPage/{{friend.userId}}">
+                    <img 
+                        [src]="friend.imageUrl ? friend.imageUrl : 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRH87TKQrWcl19xly2VNs0CjBzy8eaKNM-ZpA&s'" 
+                        class="card-img-top" 
+                        alt="Group Image"
+                        (error)="friend.imageUrl = 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRH87TKQrWcl19xly2VNs0CjBzy8eaKNM-ZpA&s'" />
+                    <div class="card-body">
+                        
+                        <h5 class="card-title">{{friend.userName}}</h5>
+                    </div>
+                   
+                </div>}
+                <!-- Repeat for other cards -->
+                
+            </div>
         </div>
     </div>
+       <!-- Circular Button -->
+   <button class="circular-button" data-bs-toggle="modal" data-bs-target="#addFriendModal" >
+    +
+</button>
+
+ <!-- adFriend modal -->
+ <div class="modal fade fixed" id="addFriendModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+ aria-hidden="true">
+ <div class="modal-dialog">
+     <div class="modal-content">
+         <div class="modal-header">
+             <h1 class="modal-title fs-5" id="exampleModalLabel">Add Friend</h1>
+             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+         </div>
+         <div class="modal-body">
+             <div class="search-container">
+                 <input type="text" id="search-input" placeholder="Search groups by name...">
+                 <button class="btn btn-outline-success search" type="button">Search</button>
+             </div>
+             <div class="card-body data-container">
+                 <ul class="list-group list-group-flush">
+             
+                      @for (user of users; track $index) {
+                     <li class="list-user">
+                         <div class="icon1-container">
+                             <div class="div">
+                                 <div class="profile-icon">
+                                     <img [src]="user.imageUrl ? user.imageUrl:'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSmpoQaaw13BKAmYv1iRPzkz9AkM0ZskCqK_g&s'"
+                                         alt="User"
+                                         (error)="user.imageUrl = 'https://images.pexels.com/photos/853168/pexels-photo-853168.jpeg?auto=compress&cs=tinysrgb&w=600'" />
+
+                                 </div>
+                                 <span class="name-span">{{ user.userName }}
+                                 </span>
+                             </div>
+                             <button class="add-button sign" data-bs-dismiss="modal"
+                                 (click)="addFriend(user.userId)">+</button>
+                         </div>
+                     </li>
+                    
+                    }
+                 </ul>
+             </div>
+         </div>
+
+     </div>
+ </div>
 </div>
+</body>
+</html>
