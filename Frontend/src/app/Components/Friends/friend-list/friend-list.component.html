@@ -8,14 +8,14 @@
 <body>
     <div class="container">
         <div class="search-container">
-            <input type="text" id="search-input" placeholder="Search friends by name...">
-            <button class="btn btn-outline-success" type="submit">Search</button>
+            <input type="text" id="search-input" placeholder="Search friends by name..." [(ngModel)]="searchTerm">
+            <button class="btn btn-outline-success" type="submit" (click)="searchFriends()">Search</button>
         </div>
         
         <div class="scrollable-container"> <!-- New scrollable container -->
             <div class="line">
                 <!-- Friend cards go here -->
-                 @for (friend of friends; track $index) {
+                 @for (friend of filteredFriends; track $index) {
                 <div class="card" routerLink="friendPage/{{friend.userId}}">
                     <img 
                         [src]="friend.imageUrl ? friend.imageUrl : 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRH87TKQrWcl19xly2VNs0CjBzy8eaKNM-ZpA&s'" 
@@ -29,7 +29,19 @@
                    
                 </div>}
                 <!-- Repeat for other cards -->
-                
+                <div *ngIf="noResultsFound" class="no-results-message">
+                    <div>
+                        <h3>❌ No Friends Found ❌</h3>
+                        <p>
+                            We couldn't find any friends matching your search criteria. 
+                            <br>Try searching with different keywords! 🌟
+                        </p>
+                        <p>
+                            📅 Add new friends! ✨
+                        </p>
+                        <a (click)="reload()" class="back-link"> &#x2B05; Back</a>                    
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -49,13 +61,13 @@
          </div>
          <div class="modal-body">
              <div class="search-container">
-                 <input type="text" id="search-input" placeholder="Search groups by name...">
-                 <button class="btn btn-outline-success search" type="button">Search</button>
+                 <input type="text" id="search-input" placeholder="Search groups by name..."[(ngModel)]="addsearchTerm">
+                 <button class="btn btn-outline-success search" type="button"  (click)="addsearchFriends()">Search</button>
              </div>
              <div class="card-body data-container">
                  <ul class="list-group list-group-flush">
              
-                      @for (user of users; track $index) {
+                      @for (user of addfilteredFriends; track $index) {
                      <li class="list-user">
                          <div class="icon1-container">
                              <div class="div">
@@ -74,7 +86,15 @@
                      </li>
                     
                     }
+                    <div *ngIf="anyResult" class="no-results-message2">
+                        <div>
+                            <h3>❌ No Users Found ❌</h3>
+                           
+                            <a (click)="reloadUsers()" class="back-link"> &#x2B05; Back</a>                    
+                        </div>
+                    </div>
                  </ul>
+               
              </div>
          </div>
 

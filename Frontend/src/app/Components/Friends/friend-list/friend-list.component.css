@@ -165,3 +165,33 @@ body{
     font-size: large;
     padding: 5px;
   }
+  .no-results-message {
+    position: fixed; /* Fix the message in place */
+    top: 150%; /* Position it from the top */
+    left: 50%; /* Position it from the left */
+    transform: translate(-50%, -50%); /* Center it both horizontally and vertically */
+    text-align: center; /* Center text */
+    background-color: rgba(255, 255, 255, 0.9); /* Optional: white background with slight transparency */
+    padding: 20px; /* Padding around the message */
+    border-radius: 10px; /* Rounded corners */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Subtle shadow for depth */
+}
+.back-link {
+  cursor: pointer; /* Change cursor to pointer on hover */
+  text-decoration: none; /* Optional: Remove underline */
+  color: #007bff; /* Optional: Change link color */
+  transition: color 0.3s ease; /* Optional: Smooth color transition */
+}
+
+.back-link:hover {
+  color: #0056b3; /* Optional: Darker color on hover */
+}
+.no-results-message2 {
+  position: relative; /* Change from fixed to relative */
+  margin-top: 20px; /* Add some margin for spacing */
+  text-align: center; /* Center text */
+  background-color: rgba(255, 255, 255, 0.9); /* Optional: white background with slight transparency */
+  padding: 20px; /* Padding around the message */
+  border-radius: 10px; /* Rounded corners */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Subtle shadow for depth */
+}
