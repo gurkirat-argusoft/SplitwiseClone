@@ -48,8 +48,6 @@ export class GroupPageComponent implements OnInit {
     this.loadUsersInGroup(groupId);
     this.getCurrentGroup(groupId);
     this.getUserGroups();
-    
-  
   }
 
   getCurrentGroup(groupId: number): void {
@@ -104,9 +102,7 @@ this.getCurrentGroup(this.groupId)
   deleteGroup(groupId: number) {
     const a = confirm('are you sure you want to delete the group ?');
     if (a)
-      this.groupService.deleteGroup(groupId).subscribe(() => {
-
-      })
+      this.groupService.deleteGroup(groupId).subscribe();
     this.router.navigateByUrl('group')
   }
   addMember() {

@@ -10,16 +10,11 @@
     <div class="container mt-5">
         <div class="card-header text-white card shadow-sm heading">
             <div class="header-content">
-                <h5 class="mb-0">friend name</h5>
+                <h5 class="mb-0">{{currentFriend.userName}}</h5>
                 <div class="icon-buttons">
-                    <!-- Edit Icon -->
-                    <button class="icon-button" title="Edit">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20" fill="#fff">
-                            <path d="M3 17.25V21h3.75l11.39-11.39-3.75-3.75L3 17.25zM20.71 7.04a1 1 0 0 0 0-1.41l-2.34-2.34a1 1 0 0 0-1.41 0l-1.42 1.42 3.75 3.75 1.42-1.42z"/>
-                        </svg>
-                    </button>
+                  
                     <!-- Delete Icon -->
-                    <button class="icon-button" title="Delete">
+                    <button class="removed-button" title="Delete" (click)="deleteFriend(currentFriend.userId)">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20" fill="#fff">
                             <path d="M6 19c0 .55.45 1 1 1h10c.55 0 1-.45 1-1V7H6v12zm2-14h8V4H8v1zm4-2C9.79 2 8 .79 8 .79S6 .79 6 .79C6 .79 4 .79 4 .79S2 .79 2 .79C2 .79 .79 4 .79S2 .79S4 .79S4 .79S6 .79S6 .79z"/>
                         </svg>
@@ -36,17 +31,21 @@
                     </div>
                     <div class="card-body data-container">
                         <ul class="list-group list-group-flush">
-                            <!-- Sample Data -->
-                            <li> 
-                                <div class="icon-container">
+                            @for (friend of friends; track $index) {
+                            <li>
+                                <div class="icon-container"
+                                   >
                                     <div class="profile-icon">
-                                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/18/Lionel-Messi-Argentina-2022-FIFA-World-Cup_sharpness.jpg/1200px-Lionel-Messi-Argentina-2022-FIFA-World-Cup_sharpness.jpg"
-                                            alt="User Profile Picture" />
-                                    </div> 
-                                    <span class="name-span">friend name</span>
+                                        <img [src]="friend.imageUrl ? friend.imageUrl : 'https://images.pexels.com/photos/853168/pexels-photo-853168.jpeg?auto=compress&cs=tinysrgb&w=600'"
+                                            class="card-img-top" alt="Group Image"
+                                            (error)="friend.imageUrl = 'https://images.pexels.com/photos/853168/pexels-photo-853168.jpeg?auto=compress&cs=tinysrgb&w=600'" />
+                                    </div>
+                                    <span class="name-span pointer"(click)="onFriendClick()" [routerLink]="['/friend', 'friendPage', friend.userId]">
+                                        {{ friend.userName | slice:0:13 }}{{ friend.userName.length > 13 ? '...' : '' }}
+                                      </span>
                                 </div>
                             </li>
-                            <!-- More list items... -->
+                            }
                         </ul>
                     </div>
                 </div>

@@ -114,3 +114,48 @@ display: flex;
     display: flex;
     justify-content: space-between;
 }
+
+.name-span{
+    font-size: large;
+    
+  }
+  .profile-icon {
+    width: 30px; /* Set the desired width */
+    height: 30px; /* Set the desired height */
+    border-radius: 50%; /* Make it circular */
+    overflow: hidden; /* Hide overflow */
+    display: flex; /* Center the image */
+    justify-content: center; /* Center horizontally */
+    align-items: center; /* Center vertically */
+    margin: 5px;
+    border: 2px solid rgb(1, 92, 153);
+  }
+
+.pointer {
+    cursor: pointer; /* Change cursor to pointer */
+  }
+  
+  /* Optional: Add hover effect for better UX */
+  .pointer:hover {
+    text-decoration: underline; /* Underline on hover */
+  }
+
+.removed-button {
+    background-color: transparent; /* Transparent background */
+    border: none; /* No border */
+    cursor: pointer; /* Pointer cursor on hover */
+    margin-left: 10px; /* Space between name and button */
+    padding: 0; /* Remove padding */
+    align-items: center;
+    margin-top: 2px;
+  }
+  
+  .removed-button svg {
+    fill: red; /* Red icon color */
+    transition: fill 0.3s; /* Smooth transition for hover effect */
+    margin-bottom: 30px;
+  }
+  
+  .removed-button:hover svg {
+    fill: darkred; /* Darker red on hover */
+  }

@@ -195,12 +195,9 @@ body {
 .buttons{
   align-items:self-end;
 }
-
-
 .pointer {
   cursor: pointer; /* Change cursor to pointer */
 }
-
 /* Optional: Add hover effect for better UX */
 .pointer:hover {
   text-decoration: underline; /* Underline on hover */
@@ -211,7 +208,6 @@ body {
 .name-span{
   font-size: large;
 }
-
 .search-container {
   margin: 0 auto 20px; /* Center horizontally and space below */
   background-color: #f0f8ff; /* Light blue background */

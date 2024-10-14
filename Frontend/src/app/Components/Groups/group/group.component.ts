@@ -26,7 +26,9 @@ export class GroupComponent {
   noResultsFound: boolean = false; 
   users: Set<User> = new Set<User>();
   user!: User;
-  constructor(private groupService: GroupService, private userService: UserService) { }
+  constructor(private groupService: GroupService, private userService: UserService) {
+    this.loadUserGroups(Number(localStorage.getItem('loginUser')));
+   }
 
   ngOnInit(): void {
     this.loadUserGroups(Number(localStorage.getItem('loginUser')));
