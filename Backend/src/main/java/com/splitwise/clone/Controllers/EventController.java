@@ -34,6 +34,14 @@ public class EventController {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
+    @GetMapping("geteventsbygroup/{groupId}")
+    public ResponseEntity<Set<Event>> getEventsByGroup(@PathVariable("groupId") int groupId) {
+        try{
+            return new ResponseEntity<>(eventService.getEventByGroup(groupId), HttpStatus.OK);
+        } catch(Exception e) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
 
     @PostMapping("/addevent")
     public ResponseEntity<Event> addEvent(@RequestBody Event event) {

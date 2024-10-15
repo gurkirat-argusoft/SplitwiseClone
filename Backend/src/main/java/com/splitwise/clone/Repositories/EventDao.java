@@ -27,4 +27,7 @@ public interface EventDao extends JpaRepository<Event, Integer> {
     @Transactional
     @Query(value = "delete from user_events where user_id= :userId and event_id= :eventId",nativeQuery = true)
     public void deleteMember(@Param("eventId") int eventId,@Param("userId") int userId);
+
+    @Query("SELECT e FROM Event e WHERE e.groupId = :groupId")
+    Set<Event> findAllByGroupId(@Param("groupId") int groupId);
 }

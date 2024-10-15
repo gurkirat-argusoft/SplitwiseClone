@@ -31,7 +31,7 @@ public class TransactionService {
     }
 
     public List<Transaction> allTransactionsByUser(int userId) {
-        return new ArrayList<>(transactionDao.findAllByGiverId(userId));
+        return new ArrayList<>(transactionDao.getAllTransactionsOfUser(userId));
     }
 
     public List<Transaction> allTransactionsByReceiver(int receiverId, int giverId) {

@@ -31,7 +31,6 @@ public class TransactionController {
                     transactionService.addTransaction(transaction.getGiverId(), transaction.getReceiverId(),
                             transaction.getAmount(), transaction.getDoneAt(), transaction.getEventId()),
                     HttpStatus.CREATED);
-
         } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
@@ -40,7 +39,7 @@ public class TransactionController {
     @GetMapping("/getAll/{userId}")
     public ResponseEntity<List<Transaction>> allTransactionsByUser(@PathVariable("userId") int userId) {
         if (userDao.findById(userId) != null) {
-            return new ResponseEntity<>(transactionService.allTransactionsByUser(userId), HttpStatus.FOUND);
+            return new ResponseEntity<>(transactionService.allTransactionsByUser(userId), HttpStatus.OK);
         } else {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }

@@ -54,6 +54,9 @@ public class EventService {
     public Set<Event> getAllEventsByUser(int userId) {
         return eventDao.eventByUser(userId);
     }
+    public Set<Event> getEventByGroup(int groupId) {
+        return eventDao.findAllByGroupId(groupId);
+    }
 
     public Event updateEvent(int eventId, Event newEvent) {
         Optional<Event> optionalEvent = eventDao.findById(eventId);
@@ -67,4 +70,5 @@ public class EventService {
             return eventDao.save(event);
         }).orElse(null);
     }
+
 }

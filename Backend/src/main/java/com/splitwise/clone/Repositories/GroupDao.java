@@ -34,4 +34,9 @@ public interface GroupDao extends JpaRepository<Group, Integer> {
     @Transactional
     @Query(value = "delete from user_groups where user_id= :userId and group_id= :groupId",nativeQuery = true)
     public void deleteMember(@Param("groupId") int groupId,@Param("userId") int userId);
+
+    @Modifying
+    @Transactional
+    @Query(value = "delete from user_groups where group_id= :groupId",nativeQuery = true)
+    public void deleteGroupData(@Param("groupId") int groupId);
 }

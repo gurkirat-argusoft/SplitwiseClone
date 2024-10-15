@@ -100,11 +100,21 @@ this.getCurrentGroup(this.groupId)
   }
 
   deleteGroup(groupId: number) {
-    const a = confirm('are you sure you want to delete the group ?');
-    if (a)
-      this.groupService.deleteGroup(groupId).subscribe();
-    this.router.navigateByUrl('group')
-  }
+    const confirmation = confirm('Are you sure you want to delete the group?');
+    if (confirmation) {
+        this.groupService.deleteGroup(groupId).subscribe(
+            () => {
+                // Optionally handle successful deletion, e.g., show a success message
+                this.router.navigateByUrl('group'); // Navigate after successful deletion
+            },
+            (error) => {
+                console.error('Error deleting group:', error);
+                // Optionally handle error case, e.g., show an error message
+            }
+        );
+    }
+    // If the user clicks "Cancel", do nothing and stay on the same page
+}
   addMember() {
     this.getAllUsers();
   }

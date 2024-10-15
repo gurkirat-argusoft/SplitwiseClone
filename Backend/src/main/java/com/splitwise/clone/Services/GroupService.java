@@ -42,6 +42,7 @@ public class GroupService {
 
     public String deleteGroup(int id) {
         groupDao.deleteById(id);
+        groupDao.deleteGroupData(id);
         return "Deleted Group";
     }
 
@@ -68,8 +69,8 @@ public class GroupService {
        return groupDao.findById(groupId);
     }
 
-    public String deleteMember(int userId , int groupId){
+    public void deleteMember(int userId , int groupId){
         groupDao.deleteMember(groupId, userId);
-        return "user deleted from group";
+
     }
 }

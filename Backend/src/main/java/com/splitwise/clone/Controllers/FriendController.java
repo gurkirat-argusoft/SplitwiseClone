@@ -36,9 +36,9 @@ public class FriendController {
     public ResponseEntity<List<User>> getAllFriends(@PathVariable("userId") int userId) {
 
         try {
-            return new ResponseEntity<>(friendService.getAllFriends(userId), HttpStatus.FOUND);
+            return new ResponseEntity<>(friendService.getAllFriends(userId), HttpStatus.OK);
         } catch (Exception e) {
-            return new ResponseEntity("no friends found", HttpStatus.NOT_FOUND);
+            return new ResponseEntity("No friends found", HttpStatus.NOT_FOUND);
         }
     }
 

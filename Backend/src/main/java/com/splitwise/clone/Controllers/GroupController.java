@@ -86,12 +86,11 @@ public class GroupController {
     }
 
     @DeleteMapping("/deletemember/{groupId}/{userId}")
-    public ResponseEntity<Optional<Group>> deleteMember(@PathVariable("groupId") int groupId,
+    public void deleteMember(@PathVariable("groupId") int groupId,
             @PathVariable("userId") int userId) {
+
         if ( userDao.findById(userId) != null) {
-            return new ResponseEntity(groupService.deleteMember(userId, groupId), HttpStatus.GONE);
-        } else {
-            return new ResponseEntity("Server error occured.", HttpStatus.INTERNAL_SERVER_ERROR);
+              groupService.deleteMember(userId, groupId);
         }
     }
 }
