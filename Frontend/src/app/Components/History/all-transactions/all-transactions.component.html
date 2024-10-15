@@ -1,124 +1,40 @@
-<div class="container">
-    <div class="table-container">
-        <div class="sort-dropdown">
-            <label for="sort-method">Sort Transactions:</label>
-            <select id="sort-method">
-                <option value="newest">Newest</option>
-                <option value="oldest">Oldest</option>
-            </select>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div class="container">
+        <div class="table-container">
+            <div class="sort-dropdown">
+                <label for="sort-method">Sort Transactions:</label>
+                <select id="sort-method" (change)="onSortChange($event)">
+                    <option value="newest" [selected]="sortMethod === 'newest'">Newest</option>
+                    <option value="oldest" [selected]="sortMethod === 'oldest'">Oldest</option>
+                </select>
+            </div>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Giver Name</th>
+                        <th>Receiver Name</th>
+                        <th>Amount</th>
+                        <th>Done At</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @for (transaction of transactions; track $index) {
+                    <tr>
+                        <td>{{getGiver(transaction.giverId)}}</td>
+                        <td>{{getReceiver(transaction.receiverId)}}</td>
+                        <td>${{transaction.amount}}</td>
+                        <td>{{transaction.doneAt | date:"dd-MM-yyyy"}} ({{transaction.doneAt | date:"HH:mm:ss"}})</td>
+                    </tr>}
+                </tbody>
+            </table>
         </div>
-        <table class="table">
-            <thead>
-                <tr>
-                    <th>Giver Name</th>
-                    <th>Receiver Name</th>
-                    <th>Amount</th>
-                    <th>Done At</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>Alice</td>
-                    <td>Bob</td>
-                    <td>$50</td>
-                    <td>2023-09-01</td>
-                </tr>
-                <tr>
-                    <td>Charlie</td>
-                    <td>David</td>
-                    <td>$30</td>
-                    <td>2023-09-02</td>
-                </tr>
-                <tr>
-                    <td>Eve</td>
-                    <td>Frank</td>
-                    <td>$20</td>
-                    <td>2023-09-03</td>
-                </tr>
-                <tr>
-                    <td>Grace</td>
-                    <td>Heidi</td>
-                    <td>$40</td>
-                    <td>2023-09-04</td>
-                </tr><tr>
-                    <td>Grace</td>
-                    <td>Heidi</td>
-                    <td>$40</td>
-                    <td>2023-09-04</td>
-                </tr><tr>
-                    <td>Grace</td>
-                    <td>Heidi</td>
-                    <td>$40</td>
-                    <td>2023-09-04</td>
-                </tr><tr>
-                    <td>Grace</td>
-                    <td>Heidi</td>
-                    <td>$40</td>
-                    <td>2023-09-04</td>
-                </tr><tr>
-                    <td>Grace</td>
-                    <td>Heidi</td>
-                    <td>$40</td>
-                    <td>2023-09-04</td>
-                </tr><tr>
-                    <td>Grace</td>
-                    <td>Heidi</td>
-                    <td>$40</td>
-                    <td>2023-09-04</td>
-                </tr><tr>
-                    <td>Grace</td>
-                    <td>Heidi</td>
-                    <td>$40</td>
-                    <td>2023-09-04</td>
-                </tr><tr>
-                    <td>Grace</td>
-                    <td>Heidi</td>
-                    <td>$40</td>
-                    <td>2023-09-04</td>
-                </tr><tr>
-                    <td>Grace</td>
-                    <td>Heidi</td>
-                    <td>$40</td>
-                    <td>2023-09-04</td>
-                </tr><tr>
-                    <td>Grace</td>
-                    <td>Heidi</td>
-                    <td>$40</td>
-                    <td>2023-09-04</td>
-                </tr><tr>
-                    <td>Grace</td>
-                    <td>Heidi</td>
-                    <td>$40</td>
-                    <td>2023-09-04</td>
-                </tr><tr>
-                    <td>Grace</td>
-                    <td>Heidi</td>
-                    <td>$40</td>
-                    <td>2023-09-04</td>
-                </tr><tr>
-                    <td>Grace</td>
-                    <td>Heidi</td>
-                    <td>$40</td>
-                    <td>2023-09-04</td>
-                </tr><tr>
-                    <td>Grace</td>
-                    <td>Heidi</td>
-                    <td>$40</td>
-                    <td>2023-09-04</td>
-                </tr><tr>
-                    <td>Grace</td>
-                    <td>Heidi</td>
-                    <td>$40</td>
-                    <td>2023-09-04</td>
-                </tr><tr>
-                    <td>Grace</td>
-                    <td>Heidi</td>
-                    <td>$40</td>
-                    <td>2023-09-04</td>
-                </tr>
-
-                <!-- Removed duplicate rows for clarity -->
-            </tbody>
-        </table>
     </div>
-</div>
+</body>
+</html>

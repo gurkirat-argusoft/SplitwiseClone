@@ -9,32 +9,32 @@ import { Constants } from '../Components/Constants/Constants';
 })
 export class TransactionService {
 
-  private apiUrl = Constants.TRANSACTION_API;
+  private baseUrl = Constants.TRANSACTION_API;
 
   constructor(private http: HttpClient) {}
 
-  // Get all transactions
-  getTransactions(): Observable<Transaction[]> {
-    return this.http.get<Transaction[]>(this.apiUrl);
+  // Add a new transaction
+  addTransaction(transaction: Transaction): Observable<Transaction> {
+    return this.http.post<Transaction>(`${this.baseUrl}/add`, transaction);
   }
 
-  // Get a transaction by ID
-  getTransactionById(id: number): Observable<Transaction> {
-    return this.http.get<Transaction>(`${this.apiUrl}/${id}`);
+  // Get all transactions for a user
+  getAllTransactionsByUser(userId: number): Observable<Transaction[]> {
+    return this.http.get<Transaction[]>(`${this.baseUrl}/getAll/${userId}`);
   }
 
-  // Create a new transaction
-  createTransaction(transaction: Transaction): Observable<Transaction> {
-    return this.http.post<Transaction>(this.apiUrl, transaction);
+  // Get transactions by receiver and giver
+  getTransactionsByReceiver(giverId: number, receiverId: number): Observable<Transaction[]> {
+    return this.http.get<Transaction[]>(`${this.baseUrl}/getbyreceiver/${giverId}/${receiverId}`);
   }
 
-  // Update an existing transaction
-  updateTransaction(transaction: Transaction): Observable<Transaction> {
-    return this.http.put<Transaction>(`${this.apiUrl}/${transaction.transactionId}`, transaction);
+  // Get user transactions by event
+  getUserTransactionsByEvent(giverId: number, eventId: number): Observable<Transaction[]> {
+    return this.http.get<Transaction[]>(`${this.baseUrl}/getusertransactionbyevent/${giverId}/${eventId}`);
   }
 
-  // Delete a transaction
-  deleteTransaction(id: number): Observable<void> {
-    return this.http.delete<void>(`${this.apiUrl}/${id}`);
+  // Get all transactions by event ID
+  getTransactionsByEvent(eventId: number): Observable<Transaction[]> {
+    return this.http.get<Transaction[]>(`${this.baseUrl}/getalltransactionbyevent/${eventId}`);
   }
 }

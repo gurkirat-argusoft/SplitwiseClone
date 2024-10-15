@@ -1,0 +1,103 @@
+.container {
+    position: fixed; /* Fix the container in place */
+    top: 40px; /* Distance from the top */
+    left: 50%; /* Position it from the left */
+    transform: translateX(-50%); /* Center it horizontally */
+    padding: 30px; /* Padding inside the container */
+    max-width: 2000px; /* Optional: set a max-width for larger screens */
+}
+
+
+.button-card{
+    border: 0;
+    box-shadow: none;
+}
+body{
+    background-color: #f8f9fa; /* Light background for better contrast */
+
+}
+.search-container {
+    margin: 0 auto 20px; /* Center horizontally and space below */
+    background-color: #f0f8ff; /* Light blue background */
+    padding: 15px; /* Padding around the input */
+    border-radius: 8px; /* Rounded corners */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+    width: 80%; /* Set width to a percentage of the parent container */
+    max-width: 900px; /* Optional: set a max-width for larger screens */
+    display: flex;
+}
+
+#search-input {
+    width: 100%; /* Full width of the container */
+    padding: 10px; /* Padding inside the input */
+    border: 1px solid #ccc; /* Border for the input */
+    border-radius: 5px; /* Rounded corners for the input */
+    background-color: #ffffff; /* White background for the input */
+    color: #333; /* Dark text color */
+    font-size: 16px; /* Increase font size */
+    transition: border-color 0.3s ease; /* Smooth transition for border color */
+    margin-right: 10px;
+}
+
+/* Change border color on focus */
+#search-input:focus {
+    border-color: #007bff; /* Change border color on focus */
+    outline: none; /* Remove default outline */
+}
+
+.scrollable-container {
+    max-height: 550px; /* Set a maximum height for scrolling */
+    overflow-y: auto; /* Enable vertical scrolling */
+    scrollbar-width: none; /* Hide scrollbar for Firefox */
+    justify-content: center;
+}
+
+.scrollable-container::-webkit-scrollbar {
+    display: none; /* Hide scrollbar for Chrome, Safari, and Opera */
+}
+
+
+
+.card {
+    border-radius: 10px; /* Maintain rounded corners */
+}
+
+.card-header {
+    background-color: rgb(42, 200, 221); /* Match header color */
+}
+
+.data-container-event {
+    max-height: 520px; /* Maintain scrolling height */
+    overflow-y: auto; /* Enable vertical scrolling */
+}
+
+.list-group-item {
+    transition: background-color 0.3s; /* Smooth transition for hover effect */
+}
+
+.list-group-item:hover {
+    background-color: #e9ecef; /* Light gray background on hover */
+}
+
+.event-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.members-icons {
+    display: flex; /* Align member icons in a row */
+}
+
+.profile-icon {
+    width: 30px; /* Set width for profile icons */
+    height: 30px; /* Set height for profile icons */
+    border-radius: 50%; /* Make it circular */
+    overflow: hidden; /* Hide overflow */
+    margin-left: 5px; /* Space between icons */
+}
+
+.profile-icon img {
+    width: 100%; /* Make image fill the container */
+    height: auto; /* Maintain aspect ratio */
+}

@@ -1,3 +1,5 @@
+import { User } from "./user";
+
 export class Event {
   eventId: number;
   description: string;
@@ -12,7 +14,8 @@ export class Event {
     happenedAt: string,
     amount: number,
     splitType: string,
-    groupId?: string
+    groupId?: string,
+    members?:Set<User>
   ) {
     this.eventId = eventId;
     this.description = description;
@@ -20,5 +23,6 @@ export class Event {
     this.amount = amount;
     this.splitType = splitType;
     this.groupId = groupId;
+    
   }
 }
